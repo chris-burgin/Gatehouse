@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pi Garage</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.min.css') }}">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="{{ url_for('static', filename='jquery.slicknav.min.js') }}"></script>
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+    <ul id="menu1">
+      <li><a href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('users') }}">Manage Users</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+    <nav>
+      <div class="site-width">
+        <h1><a href="{{ url_for('index') }}"><span> Pi </span>Garage </a></h1>
+        {% if session.logged_in %}
+        <div>
+          <a href="{{ url_for('users') }}">Manage Users</a>
+          <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+        {% endif %}
+      </div>
+    </nav>
+      {% block body %}{% endblock %}
+  </body>
+    <script>
+      $(function(){
+        $('#menu1').slicknav({customClass: 'mini', label: 'Pi Garage'});
+      });
+    </script>
+</html>

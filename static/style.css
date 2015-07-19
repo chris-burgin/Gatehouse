@@ -1,0 +1,209 @@
+
+/* Fonts */
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Oswald Light'), local('Oswald-Light'), url(http://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDZBw1xU1rKptJj_0jans920.woff2) format('woff2'), url(http://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(http://fonts.gstatic.com/s/oswald/v10/_P8jt3Y65hJ9c4AzRE0V1OvvDin1pK8aKteLpeZ5c0A.woff2) format('woff2'), url(http://fonts.gstatic.com/s/oswald/v10/qpy-UiLNKP-VfOdbcs6r6-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(http://fonts.gstatic.com/s/oswald/v10/bH7276GfdCjMjApa_dkG6ZBw1xU1rKptJj_0jans920.woff2) format('woff2'), url(http://fonts.gstatic.com/s/oswald/v10/bH7276GfdCjMjApa_dkG6bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+}
+
+/* Global CSS */
+html {
+  font-size: 62.5%;
+}
+
+.site-width {
+  margin: 0 auto;
+  max-width: 120rem;
+    padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.narrow-site-width {
+  margin: 0 auto;
+  max-width: 70rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+a,
+a:hover,
+a:visited {
+  color: #1ABC79;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+p {
+  font-size: 1.5rem;
+  font-family: Oswald;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+form {
+  font-family: Oswald;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 300;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+form input {
+  border-radius: .4rem;
+  border: 1px solid #757575;
+  width: 100%;
+  margin-top: 1rem;
+  height: 4rem;
+  font-family: Oswald;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+form input.button {
+  border: medium none;
+  background-color: rgb(42, 40, 50);
+  color: white;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+/* header */
+nav {
+  display: none;
+}
+
+.slicknav_label, .slicknav_nav {
+  background-color:#2A2832;
+}
+
+.mini a:visited{
+  color: white;
+}
+
+/* Login */
+
+#login {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+#login .login-error {
+  color: red;
+  font-family: Oswald;
+  font-size: 2rem;
+}
+
+/* Add User */
+
+#users {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+
+
+#users ul {
+  width: 100%; 
+  font-family: oswald;
+  font-size: 3rem;
+  list-style: none;
+}
+
+#users ul li {
+  width: 100%;
+}
+
+/* Home */
+#index form input.button {
+  margin-top: 5rem;
+  height: 5rem;
+}
+
+@media screen and (min-width: 80rem) {
+
+  h1 {
+    font-size: 4.3rem;
+  }
+
+  nav div.site-width div a {
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-family: Oswald;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  nav div.site-width div a {
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-family: Oswald;
+    text-transform: uppercase;
+    color: white;
+  }
+  nav div.site-width {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav div.site-width h1 a span {
+   color: white;
+  }
+
+  nav div.site-width div a {
+    margin-left: 2rem;
+    font-size: 2.5rem;
+    font-weight: 300;
+    font-family: Oswald;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  nav div.site-width div a:hover {
+   color:#1ABC79;
+  }
+
+  .mini {
+    display: none;
+  }
+
+  nav {
+    width: 100%;
+    background-color: #2A2832;
+    height: 8rem;
+    display: block;
+  }
+}

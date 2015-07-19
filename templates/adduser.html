@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+<section id="users" class="narrow-site-width">
+	<form action="{{ url_for('users') }}" method="post" >
+	   	<input type="text" class="textinput" placeholder="Username" name="username">
+	   	<input type="password" class="textinput" placeholder="Password" name="password">
+	   	<span> <input type="checkbox" name="adminuser"> Admin User </span>
+	    <input type="submit" class="button" value="Add User">
+	</form>
+	<ul class="entries">
+	  {% for entry in entries %}
+	    <li>
+	    	<div> </div>
+	    	{{ entry.username }}
+	    </li>
+	  {% endfor %}
+	 </ul>
+</section>
+{% endblock %}
