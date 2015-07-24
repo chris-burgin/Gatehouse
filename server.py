@@ -1,11 +1,11 @@
-import socket
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     render_template
 import sqlite3
-#import RPi.GPIO as GPIO
+import socket
 import time
+#import RPi.GPIO as GPIO
 
-DATABASE = '/tmp/database.db'
+DATABASE = '/tmp/database12s34.db'
 DEBUG = True #DONT FORGET TO REMOVE THIS
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -14,6 +14,7 @@ pinList = [4]
 #GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
 app.config.from_object(__name__)
+
 
 
 #DATABASE
@@ -36,7 +37,6 @@ def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
-
 
 #ROUTES
 #INDEX
@@ -76,7 +76,6 @@ def login():
 @app.route('/logout/')
 def logout():
     session.pop('logged_in', None)
-    flash('You were logged out')
     return redirect(url_for('index')) 
 
 #USERS
@@ -85,11 +84,16 @@ def users():
     verifyStatus()
     if request.method == 'GET':
         db = get_db()
-        cur = db.execute('select username, password from users order by id desc')
+        cur = db.execute('select username, password, admin from users order by id desc')
         entries = cur.fetchall()
         return render_template('adduser.html', entries=entries)
+
+    isAdmin = False
+    if (request.form.get('adminuser') != None):
+        isAdmin = True
+        
     g.db.execute('insert into users (username, password, admin) values (?, ?, ?)',
-                 [request.form['username'], request.form['password'], request.form['adminuser']])
+                 [request.form['username'], request.form['password'], isAdmin])
     g.db.commit()
     return redirect(url_for('index'))
 
