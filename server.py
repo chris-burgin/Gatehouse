@@ -97,14 +97,11 @@ def users():
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
     verifyStatus()
-    #Possibly Useless, Do some testing to make sure this page only accepts "POST" requests
-    if request.method == 'GET':
-        return redirect(url_for('index'))
-    openDoor()
+    toggleDoor()
     return redirect(url_for('index'))
 
-#OPENDOOR
-def openDoor():
+#TOGGLE FUNCTION
+def toggleDoor():
     GPIO.output(4, GPIO.LOW)
     time.sleep(.2); 
     GPIO.cleanup()
@@ -118,53 +115,6 @@ def openDoor():
 def verifyStatus():
     if session.get('logged_in') != True:
         return redirect(url_for('login'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
