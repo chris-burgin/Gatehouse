@@ -5,7 +5,7 @@ import socket
 import time
 #import RPi.GPIO as GPIO
 
-DATABASE = '/tmp/database.db'
+DATABASE = './tmp/database.db'
 DEBUG = True #DONT FORGET TO REMOVE THIS
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
@@ -26,6 +26,7 @@ def init_db():
     cursor = conn.cursor()
     sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password text not null, admin boolean not null)'
     cursor.execute(sql)
+    conn.commit()
 
 #ROUTES
 #INDEX
