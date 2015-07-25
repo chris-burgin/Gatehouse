@@ -10,8 +10,10 @@
   <body>
     <ul id="menu1">
       <li><a href="{{ url_for('index') }}">Home</a></li>
-      <li><a href="{{ url_for('users') }}">Manage Users</a></li>
-      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% if session.logged_in %}
+        <li><a href="{{ url_for('users') }}">Manage Users</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% endif %}
     </ul>
     <nav>
       <div class="site-width">

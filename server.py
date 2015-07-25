@@ -32,10 +32,11 @@ def init_db():
 #INDEX
 @app.route('/')
 def index():
-    if (session.get('logged_in') == True):
-        return render_template('index.html')
+    if not loggedIN():
+        return redirect(url_for('login'))
     else:
-        return render_template('login.html')
+        return render_template('index.html')
+    
 
 #LOGIN
 @app.route('/login/', methods=['GET', 'POST'])
@@ -72,7 +73,9 @@ def logout():
 #USERS
 @app.route('/user/', methods=['GET', 'POST'])
 def users():
-    verifyStatus()
+    if not loggedIN():
+        return redirect(url_for('login'))
+
     conn = connect_db()
     cursor = conn.cursor()
     if request.method == 'GET':
@@ -92,7 +95,8 @@ def users():
 #TOGGLEDOOR
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
-    verifyStatus()
+    if not loggedIN():
+        return redirect(url_for('login'))
     toggleDoor()
     return redirect(url_for('index'))
 
@@ -111,9 +115,9 @@ def cleanupRelay():
 
 
 #VERIFY LOGIN
-def verifyStatus():
+def loggedIN():
     if session.get('logged_in') != True:
-        return redirect(url_for('login'))
+        return False
 
 
 if __name__ == "__main__":
