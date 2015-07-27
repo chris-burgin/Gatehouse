@@ -32,7 +32,7 @@ def init_db():
 #INDEX
 @app.route('/')
 def index():
-    if not loggedIN():
+    if loggedIN() == False:
         return redirect(url_for('login'))
     else:
         return render_template('index.html')
@@ -73,7 +73,7 @@ def logout():
 #USERS
 @app.route('/user/', methods=['GET', 'POST'])
 def users():
-    if not loggedIN():
+    if loggedIN() == False:
         return redirect(url_for('login'))
 
     conn = connect_db()
@@ -81,7 +81,6 @@ def users():
     if request.method == 'GET':
         cur = cursor.execute('select username, password, admin from users order by id desc')
         entries = cur.fetchall()
-        print(entries[0])
         return render_template('adduser.html', entries=entries)
 
     isAdmin = False
@@ -95,7 +94,7 @@ def users():
 #TOGGLEDOOR
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
-    if not loggedIN():
+    if loggedIN() == False:
         return redirect(url_for('login'))
     toggleDoor()
     return redirect(url_for('index'))
