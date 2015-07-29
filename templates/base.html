@@ -13,7 +13,7 @@
       {% if session.logged_in %}
         {% if session.is_admin %}
           <li><a href="{{ url_for('users') }}">Manage Users</a></li>
-        {% endif %}  
+        {% endif %}
           <li><a href="{{ url_for('logout') }}">Logout</a></li>
       {% endif %}
     </ul>
@@ -22,7 +22,9 @@
         <h1><a href="{{ url_for('index') }}"><span> Pi </span>Garage </a></h1>
         {% if session.logged_in %}
         <div>
-          <a href="{{ url_for('users') }}">Manage Users</a>
+          {% if session.is_admin %}
+            <a href="{{ url_for('users') }}">Manage Users</a>
+          {% endif %}
           <a href="{{ url_for('logout') }}">Logout</a>
         </div>
         {% endif %}

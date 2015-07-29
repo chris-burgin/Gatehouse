@@ -1,10 +1,11 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
-from Crypto.Cipher import AES
+from Crypto.Hash import SHA256
 import sqlite3
 import socket
 import time
 import hashlib
+import base64
 #import RPi.GPIO as GPIO
 
 DATABASE = './tmp/database.db'
@@ -26,7 +27,7 @@ def connect_db():
 def init_db():
     conn = connect_db()
     cursor = conn.cursor()
-    sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password blob not null, admin boolean not null)'
+    sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password text not null , admin boolean not null)'
     cursor.execute(sql)
     conn.commit()
 
@@ -53,7 +54,7 @@ def login():
         for userAccount in entries:
             if (user[0] == userAccount[0] and user[1] == userAccount[1]):
                 session['logged_in'] = True
-                if user[1] == True:
+                if userAccount[2] == True:
                     session['is_admin'] = True
                 return render_template('index.html')
 
@@ -91,8 +92,9 @@ def users():
     isAdmin = False
     if (request.form.get('adminuser') != None):
         isAdmin = True
+
     cursor.execute('insert into users (username, password, admin) values (?, ?, ?)',
-                 [request.form['username'], str(encrypt(request.form['password'])), isAdmin])
+                 [request.form['username'], str(encrypt(request.form['password'])) , isAdmin])
     conn.commit()
     return redirect(url_for('index'))
 
@@ -120,11 +122,9 @@ def cleanupRelay():
 
 #ENCRPYT
 def encrypt(value):
-    value = hashlib.md5(value).hexdigest()
-    #encryption_suite = AES.new(key, AES.MODE_CBC, key[:16])
-    #value = encryption_suite.encrypt(key)
-    print value
-    return value
+    h = SHA256.new()
+    h.update(value)
+    return h.hexdigest()
 
 #VERIFY LOGIN
 def loggedIN():
