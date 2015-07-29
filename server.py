@@ -1,8 +1,10 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
+from Crypto.Cipher import AES
 import sqlite3
 import socket
 import time
+import hashlib
 #import RPi.GPIO as GPIO
 
 DATABASE = './tmp/database.db'
@@ -24,7 +26,7 @@ def connect_db():
 def init_db():
     conn = connect_db()
     cursor = conn.cursor()
-    sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password text not null, admin boolean not null)'
+    sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password blob not null, admin boolean not null)'
     cursor.execute(sql)
     conn.commit()
 
@@ -36,28 +38,30 @@ def index():
         return redirect(url_for('login'))
     else:
         return render_template('index.html')
-    
+
 
 #LOGIN
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if (request.method == 'POST'):
         #Database Login
-        user = [request.form['username'], request.form['password']]
+        user = [request.form['username'], encrypt(request.form['password'])]
         conn = connect_db()
         cursor = conn.cursor()
-        cur = cursor.execute('select username, password, admin from users order by id desc')
+        cur = cursor.execute("select username, password, admin from users where username = (?)",(user[0],))
         entries = cur.fetchall()
-        for databaseItem in entries:
-            if user[0] == databaseItem[0]:
-                if user[1] == databaseItem[1]:
-                    session['logged_in'] = True
-                    return render_template('index.html')
+        for userAccount in entries:
+            if (user[0] == userAccount[0] and user[1] == userAccount[1]):
+                session['logged_in'] = True
+                if user[1] == True:
+                    session['is_admin'] = True
+                return render_template('index.html')
 
         #Default Login Information
         if (request.form['username'] == app.config['USERNAME']):
             if (request.form['password'] == app.config['PASSWORD']):
                 session['logged_in'] = True
+                session['is_admin'] = True
                 return redirect(url_for('index'))
         return render_template('login.html', error=True)
 
@@ -68,7 +72,8 @@ def login():
 @app.route('/logout/')
 def logout():
     session.pop('logged_in', None)
-    return redirect(url_for('index')) 
+    session.pop('is_admin', None)
+    return redirect(url_for('index'))
 
 #USERS
 @app.route('/user/', methods=['GET', 'POST'])
@@ -87,7 +92,7 @@ def users():
     if (request.form.get('adminuser') != None):
         isAdmin = True
     cursor.execute('insert into users (username, password, admin) values (?, ?, ?)',
-                 [request.form['username'], request.form['password'], isAdmin])
+                 [request.form['username'], str(encrypt(request.form['password'])), isAdmin])
     conn.commit()
     return redirect(url_for('index'))
 
@@ -102,16 +107,24 @@ def toggledoor():
 #TOGGLE FUNCTION
 def toggleDoor():
     GPIO.output(4, GPIO.LOW)
-    time.sleep(.2); 
+    time.sleep(.2);
     GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     cleanupRelay()
 
+#Cleanup PI
 def cleanupRelay():
     for i in pinList:
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, GPIO.HIGH)
 
+#ENCRPYT
+def encrypt(value):
+    value = hashlib.md5(value).hexdigest()
+    #encryption_suite = AES.new(key, AES.MODE_CBC, key[:16])
+    #value = encryption_suite.encrypt(key)
+    print value
+    return value
 
 #VERIFY LOGIN
 def loggedIN():
@@ -119,7 +132,12 @@ def loggedIN():
         return False
 
 
+def isAdmin():
+    if session.get('is_admin') != True:
+        return False
+
+
 if __name__ == "__main__":
     #cleanupRelay()
     init_db()
-    app.run(host='127.0.0.1') 
+    app.run(host='127.0.0.1')
