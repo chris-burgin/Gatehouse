@@ -1,16 +1,16 @@
+#IMPORTS
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
 from security import Security
 from user import User
-import sqlite3
+from database import Database
 import socket
 import time
 from flask.views import View
 #import RPi.GPIO as GPIO
 
-DATABASE = './tmp/database.db'
+#GLOBAL VARIABES
 DEBUG = True #DONT FORGET TO REMOVE THIS
-SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 pinList = [4]
@@ -18,20 +18,7 @@ pinList = [4]
 app = Flask(__name__)
 app.config.from_object(__name__)
 
-def connect_db():
-    conn = sqlite3.connect(app.config['DATABASE'])
-    conn.row_factory = sqlite3.Row
-    return conn
-
-#DATABASE
-def init_db():
-    conn = connect_db()
-    cursor = conn.cursor()
-    sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password text not null , admin boolean not null)'
-    cursor.execute(sql)
-    conn.commit()
-
-#ROUTES
+##ROUTES
 #INDEX
 @app.route('/')
 def index():
@@ -47,7 +34,7 @@ def login():
     if (request.method == 'POST'):
         #Database Login
         user = [request.form['username'], security.encrypt(request.form['password'])]
-        conn = connect_db()
+        conn = database.connect()
         cursor = conn.cursor()
         cur = cursor.execute("select username, password, admin from users where username = (?)",(user[0],))
         entries = cur.fetchall()
@@ -82,7 +69,7 @@ def users():
     if user.loggedIn() == False:
         return redirect(url_for('login'))
 
-    conn = connect_db()
+    conn = database.connect()
     cursor = conn.cursor()
     if request.method == 'GET':
         cur = cursor.execute('select username, password, admin from users order by id desc')
@@ -123,7 +110,7 @@ def cleanupRelay():
 
 if __name__ == "__main__":
     #cleanupRelay()
-    init_db()
     security = Security()
     user = User()
+    database = Database()
     app.run(host='127.0.0.1')
