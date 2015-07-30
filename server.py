@@ -1,12 +1,10 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
-from Crypto.Hash import SHA256
 from security import Security
+from user import User
 import sqlite3
 import socket
 import time
-import hashlib
-import base64
 from flask.views import View
 #import RPi.GPIO as GPIO
 
@@ -37,7 +35,7 @@ def init_db():
 #INDEX
 @app.route('/')
 def index():
-    if security.loggedIn() == False:
+    if user.loggedIn() == False:
         return redirect(url_for('login'))
     else:
         return render_template('index.html')
@@ -48,7 +46,7 @@ def index():
 def login():
     if (request.method == 'POST'):
         #Database Login
-        user = [request.form['username'], encrypt(request.form['password'])]
+        user = [request.form['username'], security.encrypt(request.form['password'])]
         conn = connect_db()
         cursor = conn.cursor()
         cur = cursor.execute("select username, password, admin from users where username = (?)",(user[0],))
@@ -81,7 +79,7 @@ def logout():
 #USERS
 @app.route('/user/', methods=['GET', 'POST'])
 def users():
-    if security.loggedIn() == False:
+    if user.loggedIn() == False:
         return redirect(url_for('login'))
 
     conn = connect_db()
@@ -96,14 +94,14 @@ def users():
         isAdmin = True
 
     cursor.execute('insert into users (username, password, admin) values (?, ?, ?)',
-                 [request.form['username'], str(encrypt(request.form['password'])) , isAdmin])
+                 [request.form['username'], str(security.encrypt(request.form['password'])) , isAdmin])
     conn.commit()
     return redirect(url_for('index'))
 
 #TOGGLEDOOR
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
-    if security.loggedIn() == False:
+    if user.loggedIn() == False:
         return redirect(url_for('login'))
     toggleDoor()
     return redirect(url_for('index'))
@@ -122,14 +120,10 @@ def cleanupRelay():
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, GPIO.HIGH)
 
-#ENCRPYT
-def encrypt(value):
-    h = SHA256.new()
-    h.update(value)
-    return h.hexdigest()
 
 if __name__ == "__main__":
     #cleanupRelay()
     init_db()
     security = Security()
+    user = User()
     app.run(host='127.0.0.1')

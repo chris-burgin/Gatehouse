@@ -1,12 +1,11 @@
-from flask import session
+import base64
+from Crypto.Hash import SHA256
 class Security:
     def __init__(self):
         print('Security Created')
 
-    def loggedIn(self):
-        if session.get('logged_in') != True:
-            return False
-
-    def isAdmin():
-        if session.get('is_admin') != True:
-            return False
+    #ENCRPYT
+    def encrypt(self, value):
+        h = SHA256.new()
+        h.update(value)
+        return h.hexdigest()
