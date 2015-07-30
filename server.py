@@ -4,19 +4,17 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from security import Security
 from user import User
 from database import Database
+from garage import Garage
 import socket
 import random
 import time
 from flask.views import View
-#import RPi.GPIO as GPIO
 
 #GLOBAL VARIABES
 DEBUG = True #DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
 SECRET_KEY = str(random.random()) #This makes it more secure but the state only last as long as the page is open
-pinList = [4]
-#GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
 app.config.from_object(__name__)
 
@@ -34,20 +32,20 @@ def index():
 def login():
     if (request.method == 'POST'):
         #Database Login
-        user = [request.form['username'], security.encrypt(request.form['password'])]
-        entries = database.getUser(user[0])
+        requestedLogin = [request.form['username'], security.encrypt(request.form['password'])]
+        entries = database.getUser(requestedLogin[0])
         for userAccount in entries:
-            if (user[0] == userAccount[0] and user[1] == userAccount[1]):
-                session['logged_in'] = True
+            if (requestedLogin[0] == userAccount[0] and requestedLogin[1] == userAccount[1]):
+                user.login()
                 if userAccount[2] == True:
-                    session['is_admin'] = True
+                    user.setAdmin()
                 return render_template('index.html')
 
         #Default Login Information
         if (request.form['username'] == app.config['USERNAME']):
             if (request.form['password'] == app.config['PASSWORD']):
-                session['logged_in'] = True
-                session['is_admin'] = True
+                user.login()
+                user.setAdmin()
                 return redirect(url_for('index'))
         return render_template('login.html', error=True)
 
@@ -57,8 +55,7 @@ def login():
 #LOGOUT
 @app.route('/logout/')
 def logout():
-    session.pop('logged_in', None)
-    session.pop('is_admin', None)
+    user.logout()
     return redirect(url_for('index'))
 
 #USERS
@@ -88,22 +85,8 @@ def users():
 def toggledoor():
     if user.loggedIn() == False:
         return redirect(url_for('login'))
-    toggleDoor()
+    garage.toggleDoor()
     return redirect(url_for('index'))
-
-#TOGGLE FUNCTION
-def toggleDoor():
-    GPIO.output(4, GPIO.LOW)
-    time.sleep(.2);
-    GPIO.cleanup()
-    GPIO.setmode(GPIO.BCM)
-    cleanupRelay()
-
-#Cleanup PI
-def cleanupRelay():
-    for i in pinList:
-        GPIO.setup(i, GPIO.OUT)
-        GPIO.output(i, GPIO.HIGH)
 
 
 if __name__ == "__main__":
@@ -111,4 +94,5 @@ if __name__ == "__main__":
     security = Security()
     user = User()
     database = Database()
+    garage = Garage()
     app.run(host='127.0.0.1')

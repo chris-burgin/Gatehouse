@@ -12,3 +12,13 @@ class User:
     def isAdmin(self):
         if session.get('is_admin') != True:
             return False
+
+    def logout(self):
+        session.pop('logged_in', None)
+        session.pop('is_admin', None)
+
+    def login(self):
+        session['logged_in'] = True
+
+    def setAdmin(self):
+        session['is_admin'] = True

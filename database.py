@@ -14,7 +14,7 @@ class Database:
         conn.row_factory = sqlite3.Row
         return conn
 
-    #DATABASE
+    #GET USER
     def getUser(self, username):
         conn = self.connect()
         cursor = conn.cursor()
