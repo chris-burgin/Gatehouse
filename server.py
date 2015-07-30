@@ -1,11 +1,13 @@
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
 from Crypto.Hash import SHA256
+from security import Security
 import sqlite3
 import socket
 import time
 import hashlib
 import base64
+from flask.views import View
 #import RPi.GPIO as GPIO
 
 DATABASE = './tmp/database.db'
@@ -17,6 +19,7 @@ pinList = [4]
 #GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
 app.config.from_object(__name__)
+security = Security()
 
 def connect_db():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -35,7 +38,7 @@ def init_db():
 #INDEX
 @app.route('/')
 def index():
-    if loggedIN() == False:
+    if security.loggedIn() == False:
         return redirect(url_for('login'))
     else:
         return render_template('index.html')
@@ -79,7 +82,7 @@ def logout():
 #USERS
 @app.route('/user/', methods=['GET', 'POST'])
 def users():
-    if loggedIN() == False:
+    if security.loggedIn() == False:
         return redirect(url_for('login'))
 
     conn = connect_db()
@@ -101,7 +104,7 @@ def users():
 #TOGGLEDOOR
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
-    if loggedIN() == False:
+    if security.loggedIn() == False:
         return redirect(url_for('login'))
     toggleDoor()
     return redirect(url_for('index'))
@@ -125,17 +128,6 @@ def encrypt(value):
     h = SHA256.new()
     h.update(value)
     return h.hexdigest()
-
-#VERIFY LOGIN
-def loggedIN():
-    if session.get('logged_in') != True:
-        return False
-
-
-def isAdmin():
-    if session.get('is_admin') != True:
-        return False
-
 
 if __name__ == "__main__":
     #cleanupRelay()
