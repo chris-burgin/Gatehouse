@@ -19,7 +19,6 @@ pinList = [4]
 #GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
 app.config.from_object(__name__)
-security = Security()
 
 def connect_db():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -132,4 +131,5 @@ def encrypt(value):
 if __name__ == "__main__":
     #cleanupRelay()
     init_db()
+    security = Security()
     app.run(host='127.0.0.1')
