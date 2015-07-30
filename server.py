@@ -5,6 +5,7 @@ from security import Security
 from user import User
 from database import Database
 import socket
+import random
 import time
 from flask.views import View
 #import RPi.GPIO as GPIO
@@ -13,6 +14,7 @@ from flask.views import View
 DEBUG = True #DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
+SECRET_KEY = str(random.random()) #This makes it more secure but the state only last as long as the page is open
 pinList = [4]
 #GPIO.setmode(GPIO.BCM)
 app = Flask(__name__)
@@ -27,17 +29,13 @@ def index():
     else:
         return render_template('index.html')
 
-
 #LOGIN
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if (request.method == 'POST'):
         #Database Login
         user = [request.form['username'], security.encrypt(request.form['password'])]
-        conn = database.connect()
-        cursor = conn.cursor()
-        cur = cursor.execute("select username, password, admin from users where username = (?)",(user[0],))
-        entries = cur.fetchall()
+        entries = database.getUser(user[0])
         for userAccount in entries:
             if (user[0] == userAccount[0] and user[1] == userAccount[1]):
                 session['logged_in'] = True

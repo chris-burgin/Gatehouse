@@ -15,9 +15,8 @@ class Database:
         return conn
 
     #DATABASE
-    def init(self):
-        conn = database.connect()
+    def getUser(self, username):
+        conn = self.connect()
         cursor = conn.cursor()
-        sql = 'create table if not exists users (id integer primary key autoincrement, username text not null, password text not null , admin boolean not null)'
-        cursor.execute(sql)
-        conn.commit()
+        cur = cursor.execute("select username, password, admin from users where username = (?)",(username,))
+        return cur.fetchall()
