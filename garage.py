@@ -5,8 +5,7 @@ class Garage:
         pinList = [4]
         # GPIO.setmode(GPIO.BCM)
         # cleanupRelay
-        print 'hello'
-
+        
     # TOGGLE FUNCTION
     def toggleDoor(self):
         GPIO.output(4, GPIO.LOW)
