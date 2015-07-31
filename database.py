@@ -5,8 +5,8 @@ class Database:
         conn = self.connect()
         cursor = conn.cursor()
         sql = 'create table if not exists users (id integer primary key\
-            autoincrement, username text not null, password text not null ,\
-            admin boolean not null)'
+               autoincrement, username text not null, password text not null ,\
+               admin boolean not null)'
         cursor.execute(sql)
         conn.commit()
         print('Database Created')
@@ -21,15 +21,22 @@ class Database:
     def getUser(self, username):
         conn = self.connect()
         cursor = conn.cursor()
-        cur = cursor.execute("select username, password, admin from users where\
-            username = (?)", (username, ))
+        cur = cursor.execute("select username, password, admin from\
+                              users where username = (?)", (username, ))
         return cur.fetchall()
 
     # CREATE USER
-    def createUser(self, username, password, admin): #Options[username, password, admin]
+    def createUser(self, username, password, admin):
         conn = self.connect()
         cursor = conn.cursor()
         options = [username, password, admin]
         cursor.execute('insert into users (username, password, admin)\
                         values (?, ?, ?)', options)
         conn.commit()
+
+    def userList(self):
+        conn = self.connect()
+        cursor = conn.cursor()
+        entries = cursor.execute('select username, password, admin from\
+                                  users order by id desc').fetchall()
+        return entries

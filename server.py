@@ -65,18 +65,13 @@ def users():
     if user.loggedIn() == False:
         return redirect(url_for('login'))
 
-    conn = database.connect()
-    cursor = conn.cursor()
     if request.method == 'GET':
-        cur = cursor.execute('select username, password, admin from\
-                              users order by id desc')
-        entries = cur.fetchall()
-        return render_template('adduser.html', entries=entries)
+        return render_template('adduser.html', entries=database.userList())
 
     isAdmin = False
     if (request.form.get('adminuser') != None):
         isAdmin = True
-        
+
     database.createUser(request.form['username'],
                         str(security.encrypt(request.form['password'])),
                         isAdmin)
