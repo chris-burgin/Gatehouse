@@ -76,11 +76,10 @@ def users():
     isAdmin = False
     if (request.form.get('adminuser') != None):
         isAdmin = True
-    options = [request.form['username'],
-               str(security.encrypt(request.form['password'])), isAdmin]
-    cursor.execute('insert into users (username, password, admin)\
-                    values (?, ?, ?)', option)
-    conn.commit()
+        
+    database.createUser(request.form['username'],
+                        str(security.encrypt(request.form['password'])),
+                        isAdmin)
     return redirect(url_for('index'))
 
 
