@@ -6,6 +6,7 @@ class Security:
     def __init__(self):
         print('Security Created')
 
+
     # ENCRPYT
     def encrypt(self, value):
         h = SHA256.new()

@@ -6,6 +6,7 @@ class Garage:
         # GPIO.setmode(GPIO.BCM)
         # cleanupRelay
 
+
     # TOGGLE FUNCTION
     def toggleDoor(self):
         GPIO.output(4, GPIO.LOW)
@@ -13,6 +14,7 @@ class Garage:
         GPIO.cleanup()
         GPIO.setmode(GPIO.BCM)
         self.cleanupRelay()
+
 
     # Cleanup PI
     def cleanupRelay(self):
