@@ -41,7 +41,7 @@ def login():
                 user.login()
                 if userAccount[2] == True:
                     user.setAdmin()
-                return render_template('index.html')
+                return redirect(url_for('index'))
 
         # Default Login Information
         if (request.form['username'] == app.config['USERNAME']):
@@ -92,7 +92,6 @@ def edituser():
         password = database.fetchSpecific(userID, 'password', 'users')
     else:
         password = security.encrypt(request.form['password'])
-
 
     if (request.form.get('adminuser')):
         isAdmin = True
