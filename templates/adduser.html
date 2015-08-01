@@ -2,16 +2,26 @@
 {% block body %}
 <section id="users" class="narrow-site-width">
 	<form action="{{ url_for('users') }}" method="post" >
-	   	<input type="text" class="textinput" placeholder="Username" name="username">
-	   	<input type="password" class="textinput" placeholder="Password" name="password">
-	   	<input type="checkbox" name="adminuser"> Admin User
+	  	<input type="text" class="textinput" placeholder="Username" name="username">
+	  	<input type="password" class="textinput" placeholder="Password" name="password">
+	  	<div><input type="checkbox" name="adminuser"> Admin User</div>
 	    <input type="submit" class="button" value="Add User">
 	</form>
 	<ul class="entries">
-	  {% for entry in entries %}
+	  {% for user in users %}
 	    <li>
-	    	Username: {{ entry.username }}  | {% if entry.admin == True %} AdminUser {% endif %}
+	    	<span>Username: {{ user.username }}</span>
+			<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
+				<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
+				<input type="text" class="textinput" placeholder="New Password" name="password">
+				<div>
+					<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
+					<span>Admin User</span>
+				</div>
+				<input type="submit" class="button" value="Update User">
+			</form>
 	    </li>
+		<hr class="divide">
 	  {% endfor %}
 	 </ul>
 </section>

@@ -21,9 +21,9 @@ class Database:
     def getUser(self, username):
         conn = self.connect()
         cursor = conn.cursor()
-        cur = cursor.execute("select username, password, admin from\
-                              users where username = (?)", (username, ))
-        return cur.fetchall()
+        entries = cursor.execute("select username, password, admin from users\
+                                  where username = (?)", (username, )).fetchall()
+        return entries
 
     # CREATE USER
     def createUser(self, username, password, admin):
@@ -34,9 +34,30 @@ class Database:
                         values (?, ?, ?)', options)
         conn.commit()
 
+    #EDIT USER
+    def editUser(self, userID, username, password, admin):
+        conn = self.connect()
+        cursor = conn.cursor()
+        print ('ID: ' + userID)
+        options = [username, password, admin, userID]
+        cursor.execute('update users SET username=(?), password=(?), admin=(?)\
+                        WHERE id=(?)', options)
+        conn.commit()
+
+    #LIST USERS
     def userList(self):
         conn = self.connect()
         cursor = conn.cursor()
-        entries = cursor.execute('select username, password, admin from\
+        entries = cursor.execute('select id, username, password, admin from\
                                   users order by id desc').fetchall()
         return entries
+
+    #FETCH SPECIFIC
+    def fetchSpecific(self, userID, field, database):
+        conn = self.connect()
+        cursor = conn.cursor()
+        options = [userID]
+        query = 'select {field} from {database} where id=(?)'
+                .format(field=field, database=database)
+        entries = cursor.execute(query, options).fetchall()
+        return entries[0][0];

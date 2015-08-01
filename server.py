@@ -13,17 +13,18 @@ import time
 DEBUG = True   # DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
-SECRET_KEY = str(random.random())
+SECRET_KEY = 'hi' #str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     if user.loggedIn() == False:
         return redirect(url_for('login'))
     else:
         return render_template('index.html')
+
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -66,16 +67,40 @@ def users():
         return redirect(url_for('login'))
 
     if request.method == 'GET':
-        return render_template('adduser.html', entries=database.userList())
+        return render_template('adduser.html', users=database.userList())
 
-    isAdmin = False
-    if (request.form.get('adminuser') != None):
+    if (request.form.get('adminuser')):
         isAdmin = True
+    else:
+        isAdmin = False
 
     database.createUser(request.form['username'],
-                        str(security.encrypt(request.form['password'])),
+                        security.encrypt(request.form['password']),
                         isAdmin)
     return redirect(url_for('index'))
+
+
+@app.route('/edituser/', methods=['POST'])
+def edituser():
+    userID = request.args.get('user')
+    if not request.form['username']:
+        username = database.fetchSpecific(userID, 'username', 'users')
+    else:
+        username = request.form['username']
+
+    if not request.form['password']:
+        password = database.fetchSpecific(userID, 'password', 'users')
+    else:
+        password = security.encrypt(request.form['password'])
+
+
+    if (request.form.get('adminuser')):
+        isAdmin = True
+    else:
+        isAdmin = False
+
+    database.editUser(userID, username, password, isAdmin)
+    return redirect(url_for('users'))
 
 
 @app.route('/toggledoor/', methods=['POST'])

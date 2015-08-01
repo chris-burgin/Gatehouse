@@ -10,4 +10,4 @@ class Security:
     def encrypt(self, value):
         h = SHA256.new()
         h.update(value)
-        return h.hexdigest()
+        return str(h.hexdigest())
