@@ -7,22 +7,25 @@
 	  	<div><input type="checkbox" name="adminuser"> Admin User</div>
 	    <input type="submit" class="button" value="Add User">
 	</form>
-	<ul class="entries">
+
+	<script>
+		$(function() { $( "#accordion" ).accordion();});
+	</script>
+	<div id="accordion">
 	  {% for user in users %}
-	    <li>
-	    	<span>Username: {{ user.username }}</span>
-			<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
-				<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
-				<input type="text" class="textinput" placeholder="New Password" name="password">
-				<div>
-					<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
-					<span>Admin User</span>
-				</div>
-				<input type="submit" class="button" value="Update User">
-			</form>
-	    </li>
-		<hr class="divide">
+	    	<h3>Username: {{ user.username }}</h3>
+			<div>
+				<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
+					<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
+					<input type="text" class="textinput" placeholder="New Password" name="password">
+						<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
+						<span>Admin User</span>
+					<input type="submit" class="button" value="Update User">
+				</form>
+			</div>
 	  {% endfor %}
-	 </ul>
+	</div>
 </section>
+
+
 {% endblock %}
