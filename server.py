@@ -1,13 +1,14 @@
 #  IMPORTS
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
-from security import Security
-from user import User
-from database import Database
-from garage import Garage
-import socket
-import random
-import time
+import socket, random, time
+
+#MODULES
+from modules.security import Security
+from modules.user import User
+from modules.database import Database
+from modules.garage import Garage
+
 from flask.ext.sqlalchemy import SQLAlchemy
 
 # GLOBAL VARIABES
@@ -31,29 +32,29 @@ def index():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    if (request.method == 'POST'):
-        requestedLogin = [request.form['username'],
-                          security.encrypt(request.form['password'])]
-
-        databaseUser = database.getUser(requestedLogin[0])
-        if databaseUser:
-            if (requestedLogin[0] == databaseUser.username and
-                    requestedLogin[1] == databaseUser.password):
-                user.login()
-                if databaseUser.admin == True:
-                    user.setAdmin()
-                return redirect(url_for('index'))
-
-            # Default Login Information
-        if (request.form['username'] == app.config['USERNAME']):
-            if (request.form['password'] == app.config['PASSWORD']):
-                user.login()
-                user.setAdmin()
-                return redirect(url_for('index'))
-        return render_template('login.html', error=True)
 
     if request.method == 'GET':
         return render_template('login.html')
+
+    requestedLogin = [request.form['username'],
+                      security.encrypt(request.form['password'])]
+
+    databaseUser = database.getUser(requestedLogin[0])
+    if databaseUser:
+        if (requestedLogin[0] == databaseUser.username and
+                requestedLogin[1] == databaseUser.password):
+            user.login()
+            if databaseUser.admin == True:
+                user.setAdmin()
+            return redirect(url_for('index'))
+
+    if (request.form['username'] == app.config['USERNAME']):
+        if (request.form['password'] == app.config['PASSWORD']):
+            user.login()
+            user.setAdmin()
+            return redirect(url_for('index'))
+    return render_template('login.html', error=True)
+
 
 
 @app.route('/logout/')
