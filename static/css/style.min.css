@@ -722,29 +722,7 @@ form input {
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
-  text-transform: uppercase;
-}
 
-form div {
-    width: 100%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-
-}
-
-form div input {
-    width: auto;
-    height: auto;
-    margin: 0;
-    margin-right: .5rem;
-}
-
-form div p {
-    margin: 0;
 }
 
 form input.button {
@@ -752,7 +730,6 @@ form input.button {
   background-color: rgb(42, 40, 50);
   color: white;
   width: 100%;
-  text-transform: uppercase;
 }
 
 /* header */
@@ -791,7 +768,7 @@ nav {
 /* Add User */
 
 #users {
-  margin-top: 10rem;
+  margin-top: 5rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -802,18 +779,48 @@ nav {
   flex-flow: row wrap;
 }
 
-
-
-#users ul {
-  width: 100%;
-  font-family: oswald;
-  font-size: 3rem;
-  list-style: none;
+#users form input.date-time {
+    width: 100%;
 }
 
-#users ul li {
-  width: 100%;
+#users form div {
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    margin-top: 1rem;
+
 }
+
+#users form div input {
+    margin: 0;
+    margin-right: .3rem;
+    width: auto;
+    height: auto;
+}
+
+#users form div input:last-of-type {
+    margin-left: 2rem;
+}
+
+#users form .hidden {
+    display: none;
+}
+
+#users form .visible {
+    -webkit-animation: fadein 3s;
+    animation: fadein 3s;
+    -webkit-animation: fadedown 1s;
+    animation: fadedown 1s;
+    display: block;
+}
+
 
 /* Home */
 #index form input.button {
@@ -884,4 +891,24 @@ nav {
     height: 8rem;
     display: block;
   }
+}
+
+
+@-webkit-keyframes fadein {
+	from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+@keyframes fadein {
+	from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes fadedown {
+	from {margin-bottom: -5rem; }
+}
+
+@keyframes fadedown {
+	from {margin-bottom: -5rem; }
 }

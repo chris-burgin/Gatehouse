@@ -8,7 +8,7 @@ var pkg = require('./package.json'),
 gulp.task('css', function() {
   return gulp.src('static/*.css')
   .pipe(autoprefixer({
-          browsers: ['> 5%'],
+          browsers: ['> 2%'],
           cascade: false
         }))
   .pipe(contact('style.min.css'))

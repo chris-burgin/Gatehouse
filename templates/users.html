@@ -2,12 +2,16 @@
 {% block body %}
 <section id="users" class="narrow-site-width">
 	<form action="{{ url_for('users') }}" method="post" >
-			<input type="text" class="textinput" placeholder="Username" name="username">
-			<input type="password" class="textinput" placeholder="Password" name="password">
-		<div>
+		<input type="text" class="textinput" placeholder="Username" name="username">
+		<input type="password" class="textinput" placeholder="Password" name="password">
+
+		<div class="form-option">
 			<input type="checkbox" name="adminuser">
-			<p>Admin User</p>
+			<span>Admin</span>
+			<input class="tmpuser"type="checkbox" name="tempuser">
+			<span>Temporary</span>
 		</div>
+		<input class="date-time hidden" type="date" value="2010-12-16;">
 	    <input type="submit" class="button" value="Add User">
 	</form>
 
@@ -34,6 +38,19 @@
 	  {% endfor %}
 	</div>
 </section>
+
+<script>
+$('.tmpuser').change(function(){
+    if($(this).is(":checked")) {
+        $('.date-time').addClass("visible");
+		$('.date-time').removeClass("hidden");
+
+    } else {
+        $('.date-time').addClass("hidden");
+		$('.date-time').removeClass("visible");
+    }
+});
+</script>
 
 
 {% endblock %}
