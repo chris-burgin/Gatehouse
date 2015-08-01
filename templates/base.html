@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
   </head>
   <body>
-    <ul id="menu1">
+    <ul id="mobilemenu">
       <li><a href="{{ url_for('index') }}">Home</a></li>
       {% if session.logged_in %}
         {% if session.is_admin %}
@@ -36,7 +36,7 @@
   </body>
     <script>
     $(function(){
-        $('#menu1').slicknav({customClass: 'mini', label: 'Pi Garage'});
+        $('#mobilemenu').slicknav({customClass: 'mini', label: 'Pi Garage'});
     });
     </script>
 </html>
