@@ -8,6 +8,7 @@ from garage import Garage
 import socket
 import random
 import time
+from flask.ext.sqlalchemy import SQLAlchemy
 
 # GLOBAL VARIABES
 DEBUG = True   # DONT FORGET TO REMOVE THIS
@@ -16,6 +17,8 @@ PASSWORD = 'default'
 SECRET_KEY = 'hi' #str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
+
 
 
 @app.route('/', methods=['GET'])
@@ -32,16 +35,16 @@ def login():
         requestedLogin = [request.form['username'],
                           security.encrypt(request.form['password'])]
 
-        entries = database.getUser(requestedLogin[0])
-        for userAccount in entries:
-            if (requestedLogin[0] == userAccount[0] and
-                    requestedLogin[1] == userAccount[1]):
+        databaseUser = database.getUser(requestedLogin[0])
+        if databaseUser:
+            if (requestedLogin[0] == databaseUser.username and
+                    requestedLogin[1] == databaseUser.password):
                 user.login()
-                if userAccount[2] == True:
+                if databaseUser.admin == True:
                     user.setAdmin()
                 return redirect(url_for('index'))
 
-        # Default Login Information
+            # Default Login Information
         if (request.form['username'] == app.config['USERNAME']):
             if (request.form['password'] == app.config['PASSWORD']):
                 user.login()
@@ -81,15 +84,12 @@ def users():
 @app.route('/edituser/', methods=['POST'])
 def edituser():
     userID = request.args.get('user')
-    if not request.form['username']:
-        username = database.fetchSpecific(userID, 'username', 'users')
-    else:
-        username = request.form['username']
+    username = request.form['username']
 
-    if not request.form['password']:
-        password = database.fetchSpecific(userID, 'password', 'users')
-    else:
+    if request.form['password']:
         password = security.encrypt(request.form['password'])
+    else:
+        password = None
 
     if (request.form.get('adminuser')):
         isAdmin = True
