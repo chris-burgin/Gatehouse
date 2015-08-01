@@ -79,14 +79,13 @@ form {
 form input {
   border-radius: .4rem;
   border: 1px solid #757575;
-  width: 49%;
+  width: 100%;
   margin-top: 1rem;
   height: 4rem;
   font-family: Oswald;
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
-
 }
 
 form input.button {
@@ -174,7 +173,7 @@ nav {
   height: 5rem;
 }
 
-@media screen and (min-width: 80rem) {
+@media screen and (min-width: 800px) {
 
   h1 {
     font-size: 4.3rem;
@@ -231,6 +230,11 @@ nav {
     height: 8rem;
     display: block;
   }
+
+  form input {
+      width: 49%;
+  }
+
 }
 
 
