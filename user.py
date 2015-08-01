@@ -8,14 +8,14 @@ class User:
 
     # LOGIN
     def loggedIn(self):
-        if session.get('logged_in') != True:
-            return False
+        if session.get('logged_in'):
+            return True
 
 
     # ISADMIN
     def isAdmin(self):
-        if session.get('is_admin') != True:
-            return False
+        if session.get('is_admin'):
+            return True
 
 
     # LOGOUT
