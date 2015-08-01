@@ -2,14 +2,20 @@
 {% block body %}
 <section id="users" class="narrow-site-width">
 	<form action="{{ url_for('users') }}" method="post" >
-	  	<input type="text" class="textinput" placeholder="Username" name="username">
-	  	<input type="password" class="textinput" placeholder="Password" name="password">
-	  	<div><input type="checkbox" name="adminuser"> Admin User</div>
+			<input type="text" class="textinput" placeholder="Username" name="username">
+			<input type="password" class="textinput" placeholder="Password" name="password">
+		<div>
+			<input type="checkbox" name="adminuser">
+			<p>Admin User</p>
+		</div>
 	    <input type="submit" class="button" value="Add User">
 	</form>
 
 	<script>
-		$(function() { $( "#accordion" ).accordion();});
+		$(function() { $( "#accordion" ).accordion({
+			active: false,
+    		collapsible: true
+		});});
 	</script>
 	<div id="accordion">
 	  {% for user in users %}
@@ -18,8 +24,10 @@
 				<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
 					<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
 					<input type="text" class="textinput" placeholder="New Password" name="password">
+					<div>
 						<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
-						<span>Admin User</span>
+						<p>Admin User</p>
+					</div>
 					<input type="submit" class="button" value="Update User">
 				</form>
 			</div>
