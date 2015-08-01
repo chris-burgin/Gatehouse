@@ -30,7 +30,6 @@ def index():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if (request.method == 'POST'):
-        # Database Login
         requestedLogin = [request.form['username'],
                           security.encrypt(request.form['password'])]
 
@@ -111,7 +110,7 @@ def toggledoor():
 
 
 if __name__ == "__main__":
-    # cleanupRelay()
+    # garage.cleanupRelay()
     security = Security()
     user = User()
     database = Database()
