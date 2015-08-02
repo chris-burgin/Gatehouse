@@ -731,6 +731,32 @@ form input.button {
   width: 100%;
 }
 
+
+.ui-accordion-header.ui-state-default.ui-accordion-icons {
+    border-color: #757575;
+    color: #757575;
+    background: white;
+    height: 3rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    font-size: 2rem;
+    outline: 0;
+    margin-top: 1.5rem;
+}
+
+.ui-widget input {
+    font-family: Oswald;
+    font-size: 2rem;
+}
+
+
+
+
+
 /* header */
 nav {
   display: none;
@@ -767,7 +793,7 @@ nav {
 /* Add User */
 
 #users {
-  margin-top: 5rem;
+  margin-top: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -776,6 +802,20 @@ nav {
   justify-content: center;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
+}
+
+#users h1 {
+    width: 100%;
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    align-items: left;
+    margin-top: 5rem;
+}
+
+#users hr {
+    border-color: #757575;
+    border: solid thin;
+    width: 100%;
 }
 
 #users form input.date-time {
