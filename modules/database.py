@@ -8,19 +8,21 @@ class Database:
 
 
     # CREATE USER
-    def createUser(self, username, password, admin):
-        newUser = UserModel(username, password, admin)
+    def createUser(self, username, password, admin, experationDate):
+        newUser = UserModel(username, password, admin, experationDate)
         db.session.add(newUser)
         db.session.commit()
 
 
     #EDIT USER
-    def editUser(self, userID, username, password, admin):
+    def editUser(self, userID, username, password, admin, experationDate):
         user = UserModel.query.filter_by(id=userID).first()
         if username:
             user.username = username
         if password:
             user.password = password
+        if experationDate:
+            user.experationDate = experationDate
         user.admin = admin
         db.session.commit()
 

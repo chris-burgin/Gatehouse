@@ -74,16 +74,20 @@ def users():
     if request.method == 'GET':
         return render_template('users.html', users=database.userList())
 
-    if (request.form.get('adminuser')):
+    if request.form.get('adminuser'):
         isAdmin = True
     else:
         isAdmin = False
 
+    if request.form.get('tempuser'):
+        experationDate = str(request.form.get('dateTmp'))
+    else:
+        experationDate = 'False'
+
     database.createUser(request.form['username'],
                         security.encrypt(request.form['password']),
-                        isAdmin)
+                        isAdmin, experationDate)
     return redirect(url_for('index'))
-
 
 @app.route('/edituser/', methods=['POST'])
 def edituser():
@@ -100,7 +104,8 @@ def edituser():
     else:
         isAdmin = False
 
-    database.editUser(userID, username, password, isAdmin)
+    experationDate = str(request.form.get('dateTmp'))
+    database.editUser(userID, username, password, isAdmin, experationDate)
     return redirect(url_for('users'))
 
 

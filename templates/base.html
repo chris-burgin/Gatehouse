@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Pi Garage</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.min.css') }}">
@@ -8,32 +8,33 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="{{ url_for('static', filename='jquery.slicknav.min.js') }}"></script>
     <meta name="viewport" content="width=device-width">
-  </head>
-  <body>
+</head>
+
+<body>
     <ul id="mobilemenu">
-      <li><a href="{{ url_for('index') }}">Home</a></li>
-      {% if session.logged_in %}
-        {% if session.is_admin %}
-          <li><a href="{{ url_for('users') }}">Manage Users</a></li>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        {% if session.logged_in %}
+            {% if session.is_admin %}
+                <li><a href="{{ url_for('users') }}">Manage Users</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
         {% endif %}
-          <li><a href="{{ url_for('logout') }}">Logout</a></li>
-      {% endif %}
     </ul>
     <nav>
-      <div class="site-width">
+        <div class="site-width">
         <h1><a href="{{ url_for('index') }}"><span> Pi </span>Garage </a></h1>
         {% if session.logged_in %}
-        <div>
-          {% if session.is_admin %}
-            <a href="{{ url_for('users') }}">Manage Users</a>
-          {% endif %}
-          <a href="{{ url_for('logout') }}">Logout</a>
-        </div>
+            <div>
+                {% if session.is_admin %}
+                    <a href="{{ url_for('users') }}">Manage Users</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
         {% endif %}
-      </div>
+        </div>
     </nav>
-      {% block body %}{% endblock %}
-  </body>
+    {% block body %}{% endblock %}
+</body>
     <script>
     $(function(){
         $('#mobilemenu').slicknav({customClass: 'mini', label: 'Pi Garage'});

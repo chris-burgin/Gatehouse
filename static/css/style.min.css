@@ -814,8 +814,9 @@ nav {
 
 #users hr {
     border-color: #757575;
-    border: solid thin;
+    border: solid 1px;
     width: 100%;
+    color: #757575;
 }
 
 #users form input.date-time {

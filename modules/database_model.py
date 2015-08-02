@@ -11,8 +11,10 @@ class UserModel(db.Model):
     username = db.Column(db.String(80), unique=True)
     password = db.Column(db.String(120), unique=True)
     admin = db.Column(db.Boolean())
+    experationDate = db.Column(db.String(80))
 
-    def __init__(self, username, password, admin):
+    def __init__(self, username, password, admin, experationDate):
         self.username = username
         self.password = password
         self.admin = admin
+        self.experationDate = experationDate
