@@ -4,7 +4,6 @@ from database_model import UserModel
 class Database:
     def __init__(self):
         db.create_all()
-        print('Database Created')
 
 
     # CREATE USER

@@ -1,7 +1,6 @@
 # import RPi.GPIO as GPIO
 class Garage:
     def __init__(self):
-        print('Garage Created')
         pinList = [4]
         # GPIO.setmode(GPIO.BCM)
         # cleanupRelay

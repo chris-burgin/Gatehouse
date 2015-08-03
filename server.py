@@ -36,13 +36,17 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    requestedLogin = [request.form['username'],
-                      security.encrypt(request.form['password'])]
+    requestedLogin = [request.form['username'], request.form['password']]
 
     databaseUser = database.getUser(requestedLogin[0])
     if databaseUser:
         if (requestedLogin[0] == databaseUser.username and
-                requestedLogin[1] == databaseUser.password):
+                security.encrypt(requestedLogin[1]) == databaseUser.password):
+
+            if (databaseUser.experationDate != 'False' and
+                    user.isExpired(databaseUser.experationDate)):
+                return render_template('login.html', expired=True)
+
             user.login()
             if databaseUser.admin == True:
                 user.setAdmin()
