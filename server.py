@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
 
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET','POST'])
 def index():
     if not user.loggedIn():
         return redirect(url_for('login'))
@@ -93,8 +93,14 @@ def users():
                         isAdmin, experationDate)
     return redirect(url_for('index'))
 
-@app.route('/edituser/', methods=['POST'])
+@app.route('/edituser/', methods=['GET','POST'])
 def edituser():
+    if not user.loggedIn():
+        return redirect(url_for('login'))
+
+    if not user.isAdmin():
+        return redirect(url_for('index'))
+
     userID = request.args.get('user')
     username = request.form['username']
 
