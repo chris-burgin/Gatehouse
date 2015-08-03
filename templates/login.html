@@ -2,7 +2,7 @@
 {% block body %}
 <section id="login" class="narrow-site-width">
 	<form action="{{ url_for('login') }}" method="post">
-	   	<input type="text" class="textinput" placeholder="Username" name="username">
+	   	<input type="text" class="textinput" {% if username %} value="{{username}}" {% endif %} placeholder="Username" name="username">
 	   	<input type="password" class="textinput" placeholder="Password" name="password">
 	    <input class="button" type="submit" value="Login">
 	</form>
