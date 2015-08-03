@@ -39,7 +39,7 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    databaseUser = database.getUser(requestedLogin[0])
+    databaseUser = database.getUser(username)
     if databaseUser:
         if (username == databaseUser.username and
                 security.encrypt(password) == databaseUser.password):
