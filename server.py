@@ -80,7 +80,9 @@ def users():
         return redirect(url_for('index'))
 
     if request.method == 'GET':
-        return render_template('users.html', users=database.userList())
+        success = request.args.get('success')
+        return render_template('users.html', users=database.userList(),
+                                success=success)
 
     #Verify Username
     username = request.form['username']
@@ -150,8 +152,8 @@ def edituser():
 
     #Edits User
     database.editUser(userID, username, password, isAdmin, experationDate)
-    success = 'User Edited!'
-    return redirect(url_for('users'))
+    success = 'User Updated!'
+    return redirect(url_for('users',success=success))
 
 
 @app.route('/toggledoor/', methods=['POST'])
