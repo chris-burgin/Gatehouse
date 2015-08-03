@@ -93,7 +93,7 @@ def users():
     if len(password) < 5:
         error = "Your password must be at least 6 characters long!"
         return render_template('users.html', users=database.userList(),
-                                error=error)
+                                error=error, username=username)
     else:
         password = security.encrypt(password)
 
@@ -147,7 +147,9 @@ def edituser():
     else:
         experationDate = 'False'
 
+    #Edits User
     database.editUser(userID, username, password, isAdmin, experationDate)
+    success = 'User Edited!'
     return redirect(url_for('users'))
 
 
