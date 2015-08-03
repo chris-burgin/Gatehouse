@@ -86,8 +86,8 @@ def users():
 
     #Verify Username
     username = request.form['username']
-    if database.getUser(username):
-        error = "User " + username + " already exists!"
+    if not username:
+        error = "Invalid Username!"
         return render_template('users.html', users=database.userList(),
                                 error=error)
 
