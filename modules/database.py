@@ -13,7 +13,6 @@ class Database:
         db.session.add(newUser)
         db.session.commit()
 
-
     #EDIT USER
     def editUser(self, userID, username, password, admin, experationDate):
         user = UserModel.query.filter_by(id=userID).first()
@@ -26,12 +25,10 @@ class Database:
         user.admin = admin
         db.session.commit()
 
-
     # GET USER
     def getUser(self, userName):
         user = UserModel.query.filter_by(username=userName).first()
         return user
-
 
     #LIST USERS
     def userList(self):
