@@ -114,7 +114,12 @@ def edituser():
     else:
         isAdmin = False
 
-    experationDate = str(request.form.get('dateTmp'))
+    if (request.form.get('dateTmp')):
+        print ('What it says: ' + str(request.form.get('dateTmp')))
+        experationDate = str(request.form.get('dateTmp'))
+    else:
+        experationDate = 'False'
+
     database.editUser(userID, username, password, isAdmin, experationDate)
     return redirect(url_for('users'))
 

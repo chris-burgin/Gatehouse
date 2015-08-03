@@ -24,7 +24,7 @@
 			<div>
 				<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
 					<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
-					<input type="text" class="textinput" placeholder="New Password" name="password">
+					<input type="password" class="textinput" placeholder="New Password" name="password">
 					{% if user.experationDate != 'False'%} <input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp"> {% endif %}
 					<div>
 						<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
