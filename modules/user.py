@@ -1,6 +1,7 @@
 from flask import session
 from datetime import datetime
 
+
 class User:
 
     # LOGGED IN

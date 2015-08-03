@@ -1,4 +1,6 @@
 # import RPi.GPIO as GPIO
+
+
 class Garage:
     def __init__(self):
         pinList = [4]
