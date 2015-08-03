@@ -1,6 +1,7 @@
 #  IMPORTS
 from flask import Flask, request, session, g, redirect, url_for, \
      render_template
+from flask.ext.sqlalchemy import SQLAlchemy
 import socket, random, time
 
 #MODULES
@@ -9,7 +10,6 @@ from modules.user import User
 from modules.database import Database
 from modules.garage import Garage
 
-from flask.ext.sqlalchemy import SQLAlchemy
 
 # GLOBAL VARIABES
 DEBUG = True   # DONT FORGET TO REMOVE THIS

@@ -28,17 +28,14 @@ class User:
         else:
             return False
 
-
     # LOGOUT
     def logout(self):
         session.pop('logged_in', None)
         session.pop('is_admin', None)
 
-
     # LOGIN
     def login(self):
         session['logged_in'] = True
-
 
     # SET ADMIN
     def setAdmin(self):
