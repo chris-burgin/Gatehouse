@@ -33,6 +33,18 @@
         {% endif %}
         </div>
     </nav>
+    {% if error %}
+        <h2 class="notification error"> {{ error }} </h2>
+    {%endif%}
+
+    {% if success %}
+        <h2 class="notification success"> {{ success }} </h2>
+    {%endif%}
+
+    {% if general %}
+        <h2 class="notification general"> {{ general }} </h2>
+    {%endif%}
+
     {% block body %}{% endblock %}
 </body>
     <script>

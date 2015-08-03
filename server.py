@@ -45,7 +45,8 @@ def login():
 
             if (databaseUser.experationDate != 'False' and
                     user.isExpired(databaseUser.experationDate)):
-                return render_template('login.html', expired=True)
+                error = "Your temporary account has expired."
+                return render_template('login.html', error=error)
 
             user.login()
             if databaseUser.admin == True:
@@ -57,7 +58,9 @@ def login():
             user.login()
             user.setAdmin()
             return redirect(url_for('index'))
-    return render_template('login.html', error=True)
+
+    error = "Invalid Username or Password."
+    return render_template('login.html', error=error)
 
 
 
@@ -78,20 +81,41 @@ def users():
     if request.method == 'GET':
         return render_template('users.html', users=database.userList())
 
+    #Verify Username
+    username = request.form['username']
+    if database.getUser(username):
+        error = "User " + username + " already exists!"
+        return render_template('users.html', users=database.userList(),
+                                error=error)
+
+    #Check Password Strength
+    password = request.form['password']
+    if len(password) < 5:
+        error = "Your password must be at least 6 characters long!"
+        return render_template('users.html', users=database.userList(),
+                                error=error)
+    else:
+        password = security.encrypt(password)
+
+    #Get Admin Status
     if request.form.get('adminuser'):
         isAdmin = True
     else:
         isAdmin = False
 
+    #Get Temp User Status
     if request.form.get('tempuser'):
         experationDate = str(request.form.get('dateTmp'))
     else:
         experationDate = 'False'
 
-    database.createUser(request.form['username'],
-                        security.encrypt(request.form['password']),
-                        isAdmin, experationDate)
-    return redirect(url_for('index'))
+    #Create User
+    database.createUser(username, password, isAdmin, experationDate)
+
+    success = "User " + username + " was created!"
+    return render_template('users.html', users=database.userList(),
+                            success=success)
+
 
 @app.route('/edituser/', methods=['GET','POST'])
 def edituser():
@@ -101,21 +125,24 @@ def edituser():
     if not user.isAdmin():
         return redirect(url_for('index'))
 
+    #Get ID and Username
     userID = request.args.get('user')
     username = request.form['username']
 
+    #Checks Password and checks it so we dont has a blank password
     if request.form['password']:
         password = security.encrypt(request.form['password'])
     else:
         password = None
 
+    #Get Admin Status
     if (request.form.get('adminuser')):
         isAdmin = True
     else:
         isAdmin = False
 
+    #Get Temp User Status
     if (request.form.get('dateTmp')):
-        print ('What it says: ' + str(request.form.get('dateTmp')))
         experationDate = str(request.form.get('dateTmp'))
     else:
         experationDate = 'False'

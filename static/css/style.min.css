@@ -672,7 +672,7 @@ html {
 a,
 a:hover,
 a:visited {
-  color: #1ABC79;
+  color: #37D483;
   text-decoration: none;
 }
 
@@ -683,13 +683,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
 p {
   font-size: 1.5rem;
   font-family: Oswald;
-}
-
-h1 {
-  font-size: 2rem;
 }
 
 #accordion {
@@ -731,7 +735,6 @@ form input.button {
   width: 100%;
 }
 
-
 .ui-accordion-header.ui-state-default.ui-accordion-icons {
     border-color: #757575;
     color: #757575;
@@ -752,6 +755,39 @@ form input.button {
     font-family: Oswald;
     font-size: 2rem;
 }
+
+/*Errors*/
+.notification{
+  color: white;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 5rem;
+  z-index: -1;
+  position: absolute;
+  -webkit-animation: expanddown .7s;
+  animation: expanddown .7s;
+}
+
+.notification.error {
+    background-color: #FF4141;
+}
+
+.notification.success {
+    background-color: #37D483;
+}
+
+.notification.general {
+    background-color: #A2A7A6;
+}
+
 
 
 
@@ -782,12 +818,6 @@ nav {
   justify-content: center;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
-}
-
-#login .login-error {
-  color: red;
-  font-family: Oswald;
-  font-size: 2rem;
 }
 
 /* Add User */
@@ -918,7 +948,7 @@ nav {
   }
 
   nav div.site-width div a:hover {
-   color:#1ABC79;
+   color:#37D483;
   }
 
   .mini {
@@ -940,20 +970,28 @@ nav {
 
 
 @-webkit-keyframes fadein {
-	from {opacity: 0;}
-    to {opacity: 1;}
+	from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 
 @keyframes fadein {
-	from {opacity: 0;}
-    to {opacity: 1;}
+	from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @-webkit-keyframes fadedown {
-	from {margin-bottom: -5rem; }
+	from { margin-bottom: -5rem; }
 }
 
 @keyframes fadedown {
-	from {margin-bottom: -5rem; }
+	from { margin-bottom: -5rem; }
+}
+
+@-webkit-keyframes expanddown {
+    from { margin-top: -5rem;}
+}
+
+@keyframes expanddown {
+    from { margin-top: -5rem;}
 }
