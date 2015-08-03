@@ -36,12 +36,13 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
 
-    requestedLogin = [request.form['username'], request.form['password']]
+    username = request.form['username']
+    password = request.form['password']
 
     databaseUser = database.getUser(requestedLogin[0])
     if databaseUser:
-        if (requestedLogin[0] == databaseUser.username and
-                security.encrypt(requestedLogin[1]) == databaseUser.password):
+        if (username == databaseUser.username and
+                security.encrypt(password) == databaseUser.password):
 
             if (databaseUser.experationDate != 'False' and
                     user.isExpired(databaseUser.experationDate)):
@@ -60,7 +61,7 @@ def login():
             return redirect(url_for('index'))
 
     error = "Invalid Username or Password."
-    return render_template('login.html', error=error)
+    return render_template('login.html', error=error, username=username)
 
 
 
