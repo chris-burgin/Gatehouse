@@ -6,14 +6,13 @@ class Database:
     def __init__(self):
         db.create_all()
 
-
     # CREATE USER
     def createUser(self, username, password, admin, experationDate):
         newUser = UserModel(username, password, admin, experationDate)
         db.session.add(newUser)
         db.session.commit()
 
-    #EDIT USER
+    # EDIT USER
     def editUser(self, userID, username, password, admin, experationDate):
         user = UserModel.query.filter_by(id=userID).first()
         if username:
@@ -30,7 +29,7 @@ class Database:
         user = UserModel.query.filter_by(username=userName).first()
         return user
 
-    #LIST USERS
+    # LIST USERS
     def userList(self):
         users = UserModel.query.all()
         return users

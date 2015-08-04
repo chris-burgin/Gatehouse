@@ -9,9 +9,9 @@ class User:
         if session.get('logged_in'):
             return True
         else:
-            return False;
+            return False
 
-    #EXPIRATION
+    # EXPIRATION
     def isExpired(self, date):
         now = datetime.now()
         experationDate = datetime.strptime(date, '%Y-%m-%d')

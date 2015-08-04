@@ -1,10 +1,9 @@
-#  IMPORTS
-from flask import Flask, request, session, g, redirect, url_for, \
-     render_template
-from flask.ext.sqlalchemy import SQLAlchemy
-import socket, random, time
+# IMPORTS
+from flask import Flask, request, redirect, url_for, \
+    render_template
+import random
 
-#MODULES
+# MODULES
 from modules.security import Security
 from modules.user import User
 from modules.database import Database
@@ -15,14 +14,13 @@ from modules.garage import Garage
 DEBUG = True   # DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
-SECRET_KEY = '234fse4234gdb' #str(random.random())
+SECRET_KEY = str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
 
 
-
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if not user.loggedIn():
         return redirect(url_for('login'))
@@ -50,7 +48,7 @@ def login():
                 return render_template('login.html', error=error)
 
             user.login()
-            if databaseUser.admin == True:
+            if databaseUser.admin is True:
                 user.setAdmin()
             return redirect(url_for('index'))
 
@@ -62,7 +60,6 @@ def login():
 
     error = "Invalid Username or Password."
     return render_template('login.html', error=error, username=username)
-
 
 
 @app.route('/logout/')
@@ -82,45 +79,45 @@ def users():
     if request.method == 'GET':
         success = request.args.get('success')
         return render_template('users.html', users=database.userList(),
-                                success=success)
+                               success=success)
 
-    #Verify Username
+    # Verify Username
     username = request.form['username']
     if not username:
         error = "Invalid Username!"
         return render_template('users.html', users=database.userList(),
-                                error=error)
+                               error=error)
 
-    #Check Password Strength
+    # Check Password Strength
     password = request.form['password']
     if len(password) < 5:
         error = "Your password must be at least 6 characters long!"
         return render_template('users.html', users=database.userList(),
-                                error=error, username=username)
+                               error=error, username=username)
     else:
         password = security.encrypt(password)
 
-    #Get Admin Status
+    # Get Admin Status
     if request.form.get('adminuser'):
         isAdmin = True
     else:
         isAdmin = False
 
-    #Get Temp User Status
+    # Get Temp User Status
     if request.form.get('tempuser'):
         experationDate = str(request.form.get('dateTmp'))
     else:
         experationDate = 'False'
 
-    #Create User
+    # Create User
     database.createUser(username, password, isAdmin, experationDate)
 
     success = "User " + username + " was created!"
     return render_template('users.html', users=database.userList(),
-                            success=success)
+                           success=success)
 
 
-@app.route('/edituser/', methods=['GET','POST'])
+@app.route('/edituser/', methods=['GET', 'POST'])
 def edituser():
     if not user.loggedIn():
         return redirect(url_for('login'))
@@ -128,32 +125,32 @@ def edituser():
     if not user.isAdmin():
         return redirect(url_for('index'))
 
-    #Get ID and Username
+    # Get ID and Username
     userID = request.args.get('user')
     username = request.form['username']
 
-    #Checks Password and checks it so we dont has a blank password
+    # Checks Password and checks it so we dont has a blank password
     if request.form['password']:
         password = security.encrypt(request.form['password'])
     else:
         password = None
 
-    #Get Admin Status
+    # Get Admin Status
     if (request.form.get('adminuser')):
         isAdmin = True
     else:
         isAdmin = False
 
-    #Get Temp User Status
+    # Get Temp User Status
     if (request.form.get('dateTmp')):
         experationDate = str(request.form.get('dateTmp'))
     else:
         experationDate = 'False'
 
-    #Edits User
+    # Edits User
     database.editUser(userID, username, password, isAdmin, experationDate)
     success = 'User Updated!'
-    return redirect(url_for('users',success=success))
+    return redirect(url_for('users', success=success))
 
 
 @app.route('/toggledoor/', methods=['POST'])
@@ -170,4 +167,4 @@ if __name__ == "__main__":
     user = User()
     database = Database()
     garage = Garage()
-    app.run(host='127.0.0.1')
+    app.run(host='192.168.1.102')
