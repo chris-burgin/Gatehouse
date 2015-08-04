@@ -6,7 +6,7 @@ class Garage:
     def __init__(self):
         pinList = [4]
         # GPIO.setmode(GPIO.BCM)
-        # cleanupRelay
+        # cleanupRelay()
 
     # TOGGLE FUNCTION
     def toggleDoor(self):

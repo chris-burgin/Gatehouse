@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # IMPORTS
 from flask import Flask, request, redirect, url_for, \
     render_template
@@ -14,7 +15,7 @@ from modules.garage import Garage
 DEBUG = True   # DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
-SECRET_KEY = str(random.random())
+SECRET_KEY = 'asdfasdf'  # str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
@@ -112,7 +113,8 @@ def users():
     # Create User
     database.createUser(username, password, isAdmin, experationDate)
 
-    success = "User " + username + " was created!"
+    success = ("%s was created!")
+    success = success % username
     return render_template('users.html', users=database.userList(),
                            success=success)
 
