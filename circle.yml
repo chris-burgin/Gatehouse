@@ -8,4 +8,4 @@ dependencies:
   pre:
     - pip install flask
     - pip install Flask-SQLAlchemy
-    - pip install crypto
+    - pip install pycrypto
