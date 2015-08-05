@@ -8,5 +8,4 @@ dependencies:
   pre:
     - pip install flask
     - pip install Flask-SQLAlchemy
-    - sudo apt-get install python-dev
-    - sudo pip install -H pycrypto
+    - sudo pip install pycrypto
