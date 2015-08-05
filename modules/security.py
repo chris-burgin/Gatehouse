@@ -1,5 +1,5 @@
 try:
-    from Crypto.Hash import SHA256
+    from crypto.Hash import SHA256
 except ImportError:
     import sys
     sys.path.append('/[mypath]/anaconda/lib/python2.7/site-packages')
