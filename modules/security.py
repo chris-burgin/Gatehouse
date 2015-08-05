@@ -1,9 +1,7 @@
 try:
-    from crypto.Hash import SHA256
+    from Crypto.Hash import SHA256
 except ImportError:
-    import sys
-    sys.path.append('/[mypath]/anaconda/lib/python2.7/site-packages')
-    from Crypto.Hash import SHA256 # requires PyCrypto
+    pass
 
 
 class Security:
