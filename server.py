@@ -83,16 +83,18 @@ def users():
                                success=success)
 
     # Verify Username
-    username = request.form['username']
-    if not username:
+    username = str(request.form['username'])
+    databaseUser = database.getUser(username)
+    if (username is "" or databaseUser is not None):
         error = "Invalid Username!"
         return render_template('users.html', users=database.userList(),
                                error=error)
 
     # Check Password Strength
     password = request.form['password']
-    if len(password) < 5:
-        error = "Your password must be at least 6 characters long!"
+    if security.passwordStrength(password) is False:
+        error = "Your password must be at least 6 characters long and\
+                 contain a number!"
         return render_template('users.html', users=database.userList(),
                                error=error, username=username)
     else:

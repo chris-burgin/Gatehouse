@@ -11,3 +11,10 @@ class Security:
         h = SHA256.new()
         h.update(value)
         return str(h.hexdigest())
+
+    def passwordStrength(self, password):
+        if len(password) > 5:
+            if any(char.isdigit() for char in password):
+                return True
+
+        return False

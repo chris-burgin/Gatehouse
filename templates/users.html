@@ -3,40 +3,42 @@
 	<script src="{{ url_for('static', filename='removeuser.js') }}"></script>
 {% endblock %}
 {% block body %}
-<section id="users" class="narrow-site-width">
-	<h1> Create User </h1>
-	<hr>
-	<form action="{{ url_for('users') }}" method="post" >
-		<input type="text" class="textinput" {% if username %} value="{{username}}" {% endif %} placeholder="Username" name="username">
-		<input type="password" class="textinput" placeholder="Password" name="password">
-		<div class="form-option">
-			<input type="checkbox" name="adminuser">
-			<span>Admin</span>
-			<input class="tmpuser" type="checkbox" name="tempuser">
-			<span>Temporary</span>
+<section id="users">
+	<div class="create-user">
+		<div class="narrow-site-width">
+			<form action="{{ url_for('users') }}" method="post" >
+				<input type="text" class="textinput" {% if username %} value="{{username}}" {% endif %} placeholder="Username" name="username">
+				<input type="password" class="textinput" placeholder="Password" name="password">
+				<div class="form-option">
+					<input type="checkbox" name="adminuser">
+					<span>Admin</span>
+					<input class="tmpuser" type="checkbox" name="tempuser">
+					<span>Temporary</span>
+				</div>
+				<input class="date-time hidden" type="date" value="2010-12-16" name="dateTmp">
+			    <input type="submit" class="button" value="Add User">
+			</form>
 		</div>
-		<input class="date-time hidden" type="date" value="2010-12-16" name="dateTmp">
-	    <input type="submit" class="button" value="Add User">
-	</form>
+	</div>
 
-	<h1> Edit Users </h1>
-	<hr>
-	<div id="accordion">
-	  {% for user in users %}
-	    	<h3>Username: {{ user.username }} <i data-id="{{ user.id }}" class="fa fa-trash-o"></i></h3>
-			<div>
-				<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
-					<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
-					<input type="password" class="textinput" placeholder="New Password" name="password">
-					{% if user.experationDate != 'False'%} <input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp"> {% endif %}
-					<div>
-						<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
-						<span>Admin User</span>
-					</div>
-					<input type="submit" class="button" value="Update User">
-				</form>
-			</div>
-	  {% endfor %}
+	<div class="edit-user narrow-site-width">
+		<div id="accordion">
+		  {% for user in users %}
+		    	<h3 class="accordian_{{ user.id }}">{{ user.username }} <i data-id="{{ user.id }}" class="fa fa-trash-o"></i></h3>
+				<div class="accordian_{{ user.id }}">
+					<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
+						<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
+						<input type="password" class="textinput" placeholder="New Password" name="password">
+						{% if user.experationDate != 'False'%} <input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp"> {% endif %}
+						<div>
+							<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
+							<span>Admin User</span>
+						</div>
+						<input type="submit" class="button" value="Update User">
+					</form>
+				</div>
+		  {% endfor %}
+		</div>
 	</div>
 </section>
 

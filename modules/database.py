@@ -33,9 +33,11 @@ class Database:
     def getUser(self, username=None, userID=None):
         if username:
             user = UserModel.query.filter_by(username=username).first()
-
-        if userID:
+        elif userID:
             user = UserModel.query.filter_by(id=userID).first()
+        else:
+            user = None
+
         return user
 
     # LIST USERS

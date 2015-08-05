@@ -116,7 +116,7 @@ form input.button {
     font-size: 2rem;
 }
 
-/*Errors*/
+/* Notifications */
 .notification{
   color: white;
   width: 100%;
@@ -142,10 +142,6 @@ form input.button {
 }
 
 
-
-
-
-
 /* header */
 nav {
   display: none;
@@ -165,30 +161,31 @@ nav {
   margin-top: 10rem;
   display: flex;
   justify-content: center;
-  flex-flow: row wrap;
 }
 
-/* Add User */
+/* Users */
 
 #users {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
+    margin: 0 auto;
 }
 
 #users h1 {
     width: 100%;
-    align-items: left;
-    margin-top: 5rem;
 }
 
-#users hr {
-    border-color: #757575;
-    border: solid 1px;
-    width: 100%;
-    color: #757575;
+/* Create Users */
+
+#users .create-user {
+    padding: 10rem 0;
+    background-color: #E4E4E4;
 }
+
+/* Edit Users */
+
+#users .edit-user {
+    padding-top: 5rem;
+}
+
 
 #users form input.date-time {
     width: 100%;
@@ -198,9 +195,7 @@ nav {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     margin-top: 1rem;
-
 }
 
 #users form div input {
@@ -224,13 +219,14 @@ nav {
     animation: fadedown 1s;
     display: block;
 }
+
 /* Trash Icon */
-#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons {
+#users h3.ui-accordion-header {
     display: flex;
     justify-content: space-between;
 }
 
-#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons i:hover {
+#users h3.ui-accordion-header i:hover {
     color: #FF4141;
 }
 
