@@ -3,7 +3,9 @@ var pkg = require('./package.json'),
     rename = require('gulp-rename'),
     autoprefixer = require('gulp-autoprefixer'),
     minify = require('gulp-minify-css'),
+    rsync = require('gulp-rsync'),
     contact = require('gulp-concat');
+
 
 gulp.task('css', function() {
   return gulp.src('static/*.css')

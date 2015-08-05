@@ -155,6 +155,19 @@ def edituser():
     return redirect(url_for('users', success=success))
 
 
+@app.route('/removeuser/', methods=['POST'])
+def removeuser():
+    if not user.loggedIn():
+        return redirect(url_for('login'))
+
+    if not user.isAdmin():
+        return redirect(url_for('index'))
+
+    userID = request.args.get('user')
+
+    database.removeUser(userID)
+
+
 @app.route('/toggledoor/', methods=['POST'])
 def toggledoor():
     if not user.loggedIn():

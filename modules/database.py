@@ -14,7 +14,7 @@ class Database:
 
     # EDIT USER
     def editUser(self, userID, username, password, admin, experationDate):
-        user = UserModel.query.filter_by(id=userID).first()
+        user = self.getUser(None, userID)
         if username:
             user.username = username
         if password:
@@ -24,9 +24,18 @@ class Database:
         user.admin = admin
         db.session.commit()
 
+    def removeUser(self, userID):
+        user = self.getUser(None, userID)
+        db.session.delete(user)
+        db.session.commit()
+
     # GET USER
-    def getUser(self, userName):
-        user = UserModel.query.filter_by(username=userName).first()
+    def getUser(self, username=None, userID=None):
+        if username:
+            user = UserModel.query.filter_by(username=username).first()
+
+        if userID:
+            user = UserModel.query.filter_by(id=userID).first()
         return user
 
     # LIST USERS
