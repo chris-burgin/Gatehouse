@@ -9,3 +9,4 @@ dependencies:
     - pip install flask
     - pip install Flask-SQLAlchemy
     - sudo pip install pycrypto
+    - pip install Crypto
