@@ -1,4 +1,4 @@
 node_modules/*
 *.pyc
-tmp/database.db
+
 
