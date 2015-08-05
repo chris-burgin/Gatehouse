@@ -10,3 +10,4 @@ dependencies:
     - pip install Flask-SQLAlchemy
     - sudo pip install pycrypto
     - pip install Crypto
+    - sudo apt-get install sqlite3
