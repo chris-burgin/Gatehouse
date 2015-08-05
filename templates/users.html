@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script src="{{ url_for('static', filename='removeuser.js') }}"></script>
+{% endblock %}
 {% block body %}
 <section id="users" class="narrow-site-width">
 	<h1> Create User </h1>
@@ -20,7 +23,7 @@
 	<hr>
 	<div id="accordion">
 	  {% for user in users %}
-	    	<h3>Username: {{ user.username }}</h3>
+	    	<h3>Username: {{ user.username }} <i data-id="{{ user.id }}" class="fa fa-trash-o"></i></h3>
 			<div>
 				<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
 					<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
@@ -54,6 +57,4 @@ $(function() { $( "#accordion" ).accordion({
 	collapsible: true
 });});
 </script>
-
-
 {% endblock %}

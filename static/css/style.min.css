@@ -879,6 +879,7 @@ nav {
     margin-left: 2rem;
 }
 
+/* Form Date Animations */
 #users form .hidden {
     display: none;
 }
@@ -889,6 +890,19 @@ nav {
     -webkit-animation: fadedown 1s;
     animation: fadedown 1s;
     display: block;
+}
+/* Trash Icon */
+#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons i:hover {
+    color: #FF4141;
 }
 
 
@@ -968,12 +982,10 @@ nav {
 
 }
 
-
 @-webkit-keyframes fadein {
 	from { opacity: 0; }
     to { opacity: 1; }
 }
-
 
 @keyframes fadein {
 	from { opacity: 0; }

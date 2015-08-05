@@ -214,6 +214,7 @@ nav {
     margin-left: 2rem;
 }
 
+/* Form Date Animations */
 #users form .hidden {
     display: none;
 }
@@ -222,6 +223,15 @@ nav {
     animation: fadein 3s;
     animation: fadedown 1s;
     display: block;
+}
+/* Trash Icon */
+#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#users h3.ui-accordion-header.ui-state-default.ui-accordion-icons i:hover {
+    color: #FF4141;
 }
 
 
@@ -294,7 +304,6 @@ nav {
   }
 
 }
-
 
 @keyframes fadein {
 	from { opacity: 0; }

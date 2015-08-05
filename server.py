@@ -163,9 +163,10 @@ def removeuser():
     if not user.isAdmin():
         return redirect(url_for('index'))
 
-    userID = request.args.get('user')
+    userID = request.json['userID']
 
     database.removeUser(userID)
+    return 'success'
 
 
 @app.route('/toggledoor/', methods=['POST'])
