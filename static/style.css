@@ -27,22 +27,22 @@ html {
 .site-width {
   margin: 0 auto;
   max-width: 120rem;
-    padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding: 0 2.5rem;
 }
 
 .narrow-site-width {
   margin: 0 auto;
   max-width: 70rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding: 0 2.5rem;
 }
 
 a,
 a:hover,
 a:visited {
-  color: #37D483;
+  color: #30cc7b;
   text-decoration: none;
+  font-family: Oswald;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -53,7 +53,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 h2 {
@@ -63,6 +63,7 @@ h2 {
 p {
   font-size: 1.5rem;
   font-family: Oswald;
+  font-weight: 300;
 }
 
 #accordion {
@@ -124,9 +125,7 @@ form input.button {
   align-items: center;
   justify-content: center;
   height: 5rem;
-  z-index: -1;
-  position: absolute;
-  animation: expanddown .7s;
+  animation: fadein 1s, expanddown .7s;
 }
 
 .notification.error {
@@ -134,25 +133,53 @@ form input.button {
 }
 
 .notification.success {
-    background-color: #37D483;
+    background-color: #30cc7b;
 }
 
 .notification.general {
     background-color: #A2A7A6;
 }
 
-
 /* header */
 nav {
-  display: none;
+    width: 100%;
+    background-color: #2A2832;
+    height: 8rem;
 }
 
-.slicknav_label, .slicknav_nav {
-  background-color:#2A2832;
+nav .site-width {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.mini a:visited{
-  color: white;
+nav h1 a span {
+    color: white;
+}
+
+nav .menu {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+}
+
+nav .menu li {
+    height: 100%;
+}
+
+nav .menu li a {
+    font-size: 2.5rem;
+    color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+nav .menu .main-menu-item {
+    display: none;
 }
 
 /* Login */
@@ -225,16 +252,22 @@ nav {
     display: flex;
     justify-content: space-between;
 }
+#users h3.ui-accordion-header i {
+    padding-left: 1rem;
+}
 
-#users h3.ui-accordion-header i:hover {
+#users h3.ui-accordion-header i.fa-trash-o:hover {
     color: #FF4141;
 }
 
-
 /* Home */
 #index form input.button {
-  margin-top: 5rem;
-  height: 5rem;
+    margin-top: 5rem;
+    height: 10rem;
+    font-size: 4rem;
+    /* background-color: #37D48-3; */
+    background-color: #30cc7b;
+
 }
 
 @media screen and (min-width: 800px) {
@@ -243,62 +276,21 @@ nav {
     font-size: 4.3rem;
   }
 
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
+  nav .menu .main-menu-item {
+     display: inline-block;
   }
 
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
-  }
-  nav div.site-width {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  nav .menu li a:hover {
+      background-color: #30cc7b;
   }
 
-  nav div.site-width h1 a span {
-   color: white;
-  }
-
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
-  }
-
-  nav div.site-width div a:hover {
-   color:#37D483;
-  }
-
-  .mini {
-    display: none;
-  }
-
-  nav {
-    width: 100%;
-    background-color: #2A2832;
-    height: 8rem;
-    display: block;
+  nav .menu li a i {
+      margin-right: 1rem;
   }
 
   form input {
       width: 49%;
   }
-
 }
 
 @keyframes fadein {
@@ -311,5 +303,5 @@ nav {
 }
 
 @keyframes expanddown {
-    from { margin-top: -5rem;}
+    from { height: 0;}
 }

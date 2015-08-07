@@ -24,14 +24,27 @@
 	<div class="edit-user narrow-site-width">
 		<div id="accordion">
 		  {% for user in users %}
-		    	<h3 class="accordian_{{ user.id }}">{{ user.username }} <i data-id="{{ user.id }}" class="fa fa-trash-o"></i></h3>
+		    	<h3 class="accordian_{{ user.id }}">
+					<span>{{ user.username }}</span>
+					<div>
+						{% if user.admin %}
+							<i class="fa fa-star-o"></i>
+						{% endif %}
+						{% if user.experationDate != 'False' %}
+							<i class="fa fa-clock-o"></i>
+						{% endif %}
+						<i data-id="{{ user.id }}" class="fa fa-trash-o"></i>
+					</div>
+				</h3>
 				<div class="accordian_{{ user.id }}">
 					<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
 						<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
 						<input type="password" class="textinput" placeholder="New Password" name="password">
-						{% if user.experationDate != 'False'%} <input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp"> {% endif %}
+						{% if user.experationDate != 'False'%}
+							<input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp">
+						{% endif %}
 						<div>
-							<input type="checkbox" name="adminuser" {% if user.admin == True %} checked {% endif %}>
+							<input type="checkbox" name="adminuser" {% if user.admin %} checked {% endif %}>
 							<span>Admin User</span>
 						</div>
 						<input type="submit" class="button" value="Update User">

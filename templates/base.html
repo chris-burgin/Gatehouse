@@ -7,31 +7,31 @@
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.min.css') }}">
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="{{ url_for('static', filename='jquery.slicknav.min.js') }}"></script>
     {% block scripts %}{% endblock %}
     <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
-    <ul id="mobilemenu">
-        <li><a href="{{ url_for('index') }}">Home</a></li>
-        {% if session.logged_in %}
-            {% if session.is_admin %}
-                <li><a href="{{ url_for('users') }}">Manage Users</a></li>
-            {% endif %}
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% endif %}
-    </ul>
     <nav>
         <div class="site-width">
         <h1><a href="{{ url_for('index') }}"><span> Pi </span>Garage </a></h1>
         {% if session.logged_in %}
-            <div>
+            <ul class="menu">
                 {% if session.is_admin %}
-                    <a href="{{ url_for('users') }}">Manage Users</a>
+                <li>
+                    <a class="mobile-menu-item"href="{{ url_for('users') }}">
+                        <i class="fa fa-users"></i>
+                        <span class="main-menu-item">Manage Users</span>
+                    </a>
+                </li>
                 {% endif %}
-                <a href="{{ url_for('logout') }}">Logout</a>
-            </div>
+                <li>
+                    <a class="mobile-menu-item" href="{{ url_for('logout') }}">
+                        <i class="fa fa-sign-out"></i>
+                        <span class="main-menu-item"> Logout </span>
+                    </a>
+                </li>
+            </ul>
         {% endif %}
         </div>
     </nav>
@@ -49,9 +49,4 @@
 
     {% block body %}{% endblock %}
 </body>
-    <script>
-    $(function(){
-        $('#mobilemenu').slicknav({customClass: 'mini', label: 'Pi Garage'});
-    });
-    </script>
 </html>
