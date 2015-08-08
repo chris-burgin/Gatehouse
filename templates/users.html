@@ -42,7 +42,7 @@
 					</div>
 				</h3>
 				<div class="accordian_{{ user.id }}">
-					<form class="edit-user" action="{{ url_for('edituser') }}?user={{ user.id }}" method="post">
+					<form class="edit-user" action="{{ url_for('edituser') }}?userID={{ user.id }}" method="post">
 						<input type="text" class="textinput" placeholder="{{ user.username }}" name="username">
 						<input type="password" class="textinput" placeholder="New Password" name="password">
 						{% if user.experationDate != 'False'%}

@@ -16,5 +16,4 @@ class Security:
         if len(password) > 5:
             if any(char.isdigit() for char in password):
                 return True
-
         return False

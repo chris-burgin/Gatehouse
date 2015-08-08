@@ -43,7 +43,7 @@ def login():
         if (username == databaseUser.username and
                 security.encrypt(password) == databaseUser.password):
 
-            if (databaseUser.experationDate != 'False' and
+            if (databaseUser.experationDate is not 'False' and
                     user.isExpired(databaseUser.experationDate)):
                 error = "Your temporary account has expired."
                 return render_template('login.html', error=error)
@@ -53,8 +53,8 @@ def login():
                 user.setAdmin()
             return redirect(url_for('index'))
 
-    if (request.form['username'] == app.config['USERNAME']):
-        if (request.form['password'] == app.config['PASSWORD']):
+    if (request.form['username'] == app.config['USERNAME'] and
+       request.form['password'] == app.config['PASSWORD']):
             user.login()
             user.setAdmin()
             return redirect(url_for('index'))
@@ -90,15 +90,15 @@ def users():
         return render_template('users.html', users=database.userList(),
                                error=error)
 
-    # Check Password Strength
+    # Verify Password
     password = request.form['password']
-    if security.passwordStrength(password) is False:
+    if security.passwordStrength(password) is True:
+        password = security.encrypt(password)
+    else:
         error = "Your password must be at least 6 characters long and\
                  contain a number!"
         return render_template('users.html', users=database.userList(),
                                error=error, username=username)
-    else:
-        password = security.encrypt(password)
 
     # Get Admin Status
     if request.form.get('adminuser'):
@@ -130,10 +130,10 @@ def edituser():
         return redirect(url_for('index'))
 
     # Get ID and Username
-    userID = request.args.get('user')
+    userID = request.args.get('userID')
     username = request.form['username']
 
-    # Checks Password and checks it so we dont has a blank password
+    # Checks Password
     if request.form['password']:
         password = security.encrypt(request.form['password'])
     else:
@@ -154,7 +154,7 @@ def edituser():
     # Edits User
     database.editUser(userID, username, password, isAdmin, experationDate)
     success = 'User Updated!'
-    return render_template('users.html', success=success)
+    return redirect(url_for('users', success=success))
 
 
 @app.route('/removeuser/', methods=['POST'])
