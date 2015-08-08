@@ -36,15 +36,21 @@
         </div>
     </nav>
     {% if error %}
-        <h2 class="notification error"> {{ error }} </h2>
+        <h2 class="notification error">
+            <span> {{ error }} </span>
+        </h2>
     {%endif%}
 
     {% if success %}
-        <h2 class="notification success"> {{ success }} </h2>
+        <h2 class="notification success">
+            <span> {{ success }} </span>
+        </h2>
     {%endif%}
 
     {% if general %}
-        <h2 class="notification general"> {{ general }} </h2>
+        <h2 class="notification general">
+            <span> {{ general }} </span>
+        </h2>
     {%endif%}
 
     {% block body %}{% endblock %}

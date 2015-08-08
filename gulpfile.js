@@ -3,11 +3,13 @@ var pkg = require('./package.json'),
     rename = require('gulp-rename'),
     autoprefixer = require('gulp-autoprefixer'),
     minify = require('gulp-minify-css'),
+    myth = require('gulp-myth'),
     contact = require('gulp-concat');
 
 
 gulp.task('css', function() {
   return gulp.src('static/*.css')
+  .pipe(myth())
   .pipe(autoprefixer({
           browsers: ['> 5%'],
           cascade: false

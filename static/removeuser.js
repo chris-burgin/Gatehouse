@@ -15,7 +15,11 @@ $('i').click(function() {
         success: function(result) {
           $('.accordian_' + userID).remove();
           $('.notification').remove();
-          $( "nav" ).append( '<h2 class="notification success">User Removed!</h2>' );
+          if (result == "success") {
+              $( "nav" ).append( '<h2 class="notification success">User Removed!</h2>' );
+          } else {
+              $( "nav" ).append( '<h2 class="notification error">Failed To Remove User</h2>' );
+          }
         }
     });
 });

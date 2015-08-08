@@ -19,15 +19,20 @@ class Database:
             user.username = username
         if password:
             user.password = password
-        if experationDate:
+        if experationDate is not user.experationDate:
             user.experationDate = experationDate
+
         user.admin = admin
         db.session.commit()
 
     def removeUser(self, userID):
-        user = self.getUser(None, userID)
-        db.session.delete(user)
-        db.session.commit()
+        try:
+            user = self.getUser(None, userID)
+            db.session.delete(user)
+            db.session.commit()
+            return True
+        except:
+            return False
 
     # GET USER
     def getUser(self, username=None, userID=None):

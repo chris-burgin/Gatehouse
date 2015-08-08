@@ -124,8 +124,9 @@ form input.button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
+  min-height: 5rem;
   animation: fadein 1s, expanddown .7s;
+  position: relative;
 }
 
 .notification.error {
@@ -190,6 +191,18 @@ nav .menu .main-menu-item {
   justify-content: center;
 }
 
+/* Home */
+#index form input.button {
+    height: 10rem;
+    font-size: 4rem;
+    background-color: #30cc7b;
+}
+
+#index .wrapper {
+    padding: 5rem 0;
+    background-color: #E4E4E4;
+}
+
 /* Users */
 
 #users {
@@ -203,7 +216,7 @@ nav .menu .main-menu-item {
 /* Create Users */
 
 #users .create-user {
-    padding: 10rem 0;
+    padding: 1rem 0;
     background-color: #E4E4E4;
 }
 
@@ -260,37 +273,34 @@ nav .menu .main-menu-item {
     color: #FF4141;
 }
 
-/* Home */
-#index form input.button {
-    margin-top: 5rem;
-    height: 10rem;
-    font-size: 4rem;
-    /* background-color: #37D48-3; */
-    background-color: #30cc7b;
-
-}
-
 @media screen and (min-width: 800px) {
+    /* Global CSS */
+    h1 {
+        font-size: 4.3rem;
+    }
 
-  h1 {
-    font-size: 4.3rem;
-  }
+    form input {
+        width: 49%;
+    }
 
-  nav .menu .main-menu-item {
-     display: inline-block;
-  }
+    /* Navigation Menu */
+    nav .menu .main-menu-item {
+        display: inline-block;
+    }
 
-  nav .menu li a:hover {
-      background-color: #30cc7b;
-  }
+    nav .menu li a:hover {
+        background-color: #30cc7b;
+    }
 
-  nav .menu li a i {
-      margin-right: 1rem;
-  }
+    nav .menu li a i {
+        margin-right: 1rem;
+    }
 
-  form input {
-      width: 49%;
-  }
+    /* Users */
+    #users .create-user {
+        padding: 8rem 0;
+    }
+
 }
 
 @keyframes fadein {

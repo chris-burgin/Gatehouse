@@ -121,7 +121,7 @@ def users():
                            success=success)
 
 
-@app.route('/edituser/', methods=['GET', 'POST'])
+@app.route('/edituser/', methods=['POST'])
 def edituser():
     if not user.loggedIn():
         return redirect(url_for('login'))
@@ -154,7 +154,7 @@ def edituser():
     # Edits User
     database.editUser(userID, username, password, isAdmin, experationDate)
     success = 'User Updated!'
-    return redirect(url_for('users', success=success))
+    return render_template('users.html', success=success)
 
 
 @app.route('/removeuser/', methods=['POST'])
@@ -167,8 +167,10 @@ def removeuser():
 
     userID = request.json['userID']
 
-    database.removeUser(userID)
-    return 'success'
+    if database.removeUser(userID):
+        return 'success'
+    else:
+        return 'fail'
 
 
 @app.route('/toggledoor/', methods=['POST'])
