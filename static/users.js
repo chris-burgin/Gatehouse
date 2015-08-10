@@ -16,9 +16,9 @@ $(document).ready(function () {
                 $('.accordian_' + userID).remove();
                 $('.notification').remove();
                 if (result == "success") {
-                    notification('success','User Updated!');
+                    notification('success','User Removed!');
                 } else {
-                    notification('success','Failed To Update User.');
+                    notification('success','Failed To Remove User.');
                 }
             }
         });
@@ -60,5 +60,5 @@ $(document).ready(function () {
 
 //Extra Functions
 function notification(type, message) {
-    $( "nav" ).append( '<h2 class="notification' + type + '">' + message + '</h2>' );
+    $( "nav" ).append( '<h2 class="notification ' + type + '">' + message + '</h2>' );
 }

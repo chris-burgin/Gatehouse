@@ -19,6 +19,6 @@ class Security:
         return False
 
     def usernameStrength(self, username):
-        if len(username) > 3:
+        if len(username) > 2:
             return True
         return False

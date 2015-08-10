@@ -43,7 +43,7 @@ def login():
         if (username == databaseUser.username and
                 security.encrypt(password) == databaseUser.password):
 
-            if (databaseUser.experationDate is not 'False' and
+            if (databaseUser.experationDate != 'False' and
                     user.isExpired(databaseUser.experationDate)):
                 error = "Your temporary account has expired."
                 return render_template('login.html', error=error)
@@ -85,7 +85,7 @@ def users():
     # Verify Username
     username = str(request.form['username'])
     databaseUser = database.getUser(username)
-    if (username is "" or databaseUser is not None):
+    if (databaseUser is not None):
         error = "User already exists"
         return render_template('users.html', users=database.userList(),
                                error=error)
