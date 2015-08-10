@@ -664,7 +664,8 @@ html {
 .narrow-site-width {
   margin: 0 auto;
   max-width: 70rem;
-  padding: 0 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 a,
@@ -727,6 +728,11 @@ form input {
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
+  outline: 0;
+}
+
+form input .error {
+    border-color: #ff4141;
 }
 
 form input.button {
@@ -854,16 +860,24 @@ nav .menu .main-menu-item {
   justify-content: center;
 }
 
+
 /* Home */
+#index .wrapper {
+    padding: 5rem 0;
+}
+
+#index .narrow-site-width {
+    padding: 0;
+}
+
 #index form input.button {
     height: 10rem;
     font-size: 4rem;
     background-color: #30cc7b;
 }
 
-#index .wrapper {
-    padding: 5rem 0;
-    background-color: #E4E4E4;
+#index .wrapper form input {
+    border-radius: 0;
 }
 
 /* Users */
@@ -972,6 +986,14 @@ nav .menu .main-menu-item {
     /* Users */
     #users .create-user {
         padding: 8rem 0;
+    }
+
+    #index .wrapper {
+        background-color: #E4E4E4;
+    }
+
+    #index .wrapper form input {
+        border-radius: .4rem;
     }
 
 }

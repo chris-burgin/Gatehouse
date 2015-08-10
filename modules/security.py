@@ -17,3 +17,8 @@ class Security:
             if any(char.isdigit() for char in password):
                 return True
         return False
+
+    def usernameStrength(self, username):
+        if len(username) > 3:
+            return True
+        return False

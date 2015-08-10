@@ -86,7 +86,12 @@ def users():
     username = str(request.form['username'])
     databaseUser = database.getUser(username)
     if (username is "" or databaseUser is not None):
-        error = "Invalid Username!"
+        error = "User already exists"
+        return render_template('users.html', users=database.userList(),
+                               error=error)
+
+    if (not security.usernameStrength(username)):
+        error = "Username must be at least 3 characters long"
         return render_template('users.html', users=database.userList(),
                                error=error)
 
@@ -96,7 +101,7 @@ def users():
         password = security.encrypt(password)
     else:
         error = "Your password must be at least 6 characters long and\
-                 contain a number!"
+                 contain a number"
         return render_template('users.html', users=database.userList(),
                                error=error, username=username)
 
