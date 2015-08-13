@@ -1,4 +1,23 @@
 $(document).ready(function () {
+    //Temp User
+    $('.tmpuser').change(function(){
+        if($(this).is(":checked")) {
+            $('.date-time').addClass("visible");
+    		$('.date-time').removeClass("hidden");
+
+        } else {
+            $('.date-time').addClass("hidden");
+    		$('.date-time').removeClass("visible");
+        }
+    });
+
+    //Accordian
+    $(function() { $( "#accordion" ).accordion({
+    	active: false,
+    	collapsible: true
+    });});
+
+
     //Remove User
     $('.fa-trash-o').click(function() {
         var userID = $(this).data("id");
@@ -69,6 +88,7 @@ $(document).ready(function () {
 });
 
 //Extra Functions
+//Notification Function
 function notification(type, message) {
     $( "nav" ).append( '<h2 class="notification ' + type + '">' + message + '</h2>' );
 }
