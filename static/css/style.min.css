@@ -1039,6 +1039,10 @@ nav .menu .main-menu-item {
   padding: 2rem;
 }
 
+#users .edit-user .button.update-user.disabled {
+  background-color: #A2A7A6;
+}
+
 #users form input.date-time {
   width: 100%;
 }

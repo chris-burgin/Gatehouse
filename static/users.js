@@ -29,6 +29,7 @@ $(document).ready(function () {
         var selector = $(this).attr("class");
         var username;
         var password;
+        var submitButton = $(this).parent('.edit-user').find('.button');
         alert(selector);
         if (selector.indexOf('password') != -1) {
             password = $(this);
@@ -54,12 +55,15 @@ $(document).ready(function () {
             if (username.is(":focus")) {
                 username.addClass('error');
             }
+            submitButton.addClass('disabled');
         }
 
         if (updateValid === true) {
-            $(this).parent('.edit-user').find('.update-user').prop('disabled', false);
+            submitButton.prop('disabled', false);
+            submitButton.removeClass('disabled');
         } else {
-            $(this).parent('.edit-user').find('.update-user').prop('disabled', true);
+            submitButton.prop('disabled', true);
+            submitButton.addClass('disabled');
         }
     });
 });
