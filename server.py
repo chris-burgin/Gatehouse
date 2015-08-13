@@ -192,4 +192,4 @@ if __name__ == "__main__":
     user = User()
     database = Database()
     garage = Garage()
-    app.run(host='192.168.1.102')
+    app.run(host='127.0.0.1')

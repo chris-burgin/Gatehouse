@@ -4,6 +4,7 @@
 {% endblock %}
 {% block body %}
 <section id="users">
+	<!-- Add Users -->
 	<div class="create-user">
 		<div class="narrow-site-width">
 			<form action="{{ url_for('users') }}" method="post" >
@@ -19,9 +20,10 @@
 			    <input type="submit" class="button" value="Add User">
 			</form>
 		</div>
-	</div>
+	</div> 
 
-	<div class="edit-user narrow-site-width">
+	<!-- Editing Users -->
+	<div class="edit-users narrow-site-width">
 		<div id="accordion">
 		  {% for user in users %}
 		    	<h3 class="accordian_{{ user.id }}">

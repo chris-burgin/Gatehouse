@@ -95,8 +95,8 @@ form input {
   outline: 0;
 }
 
-form input .error {
-    border-color: #ff4141;
+form input.error {
+    border-color: #ff4141 !important;
 }
 
 form input.button {
@@ -123,8 +123,16 @@ form input.button {
     font-size: 2rem;
 }
 
+#accordion .ui-accordion-content {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
 /* Notifications */
-.notification{
+.notification {
   color: white;
   width: 100%;
   display: flex;
@@ -190,7 +198,6 @@ nav .menu .main-menu-item {
 }
 
 /* Login */
-
 #login {
   margin-top: 10rem;
   display: flex;
@@ -235,9 +242,14 @@ nav .menu .main-menu-item {
 }
 
 /* Edit Users */
+#users .edit-users {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
 
 #users .edit-user {
-    padding-top: 5rem;
+    width: 95%;
+    padding: 2rem;
 }
 
 
@@ -261,6 +273,10 @@ nav .menu .main-menu-item {
 
 #users form div input:last-of-type {
     margin-left: 2rem;
+}
+
+#users .ui-accordion-header .ui-accordion-header-icon {
+    display: none;
 }
 
 /* Form Date Animations */

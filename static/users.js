@@ -25,11 +25,12 @@ $(document).ready(function () {
     });
 
     //Check Password Length
-    $( ".edit-user .password, .edit-user .username" ).keyup(function() {
+    $( ".edit-user .password, .edit-user .username" ).on("input", function() {
         var selector = $(this).attr("class");
         var username;
         var password;
-        if (selector == 'password') {
+        alert(selector);
+        if (selector.indexOf('password') != -1) {
             password = $(this);
             username = $(this).parent('.edit-user').find('.username');
         } else {
@@ -41,13 +42,18 @@ $(document).ready(function () {
             password.removeClass('error');
         } else {
             updateValid = false;
-            password.addClass('error');
+            if (password.is(":focus")) {
+                password.addClass('error');
+            }
+
         }
         if (username.val().length > 2) {
             username.removeClass('error');
         } else {
             updateValid = false;
-            username.addClass('error');
+            if (username.is(":focus")) {
+                username.addClass('error');
+            }
         }
 
         if (updateValid === true) {
