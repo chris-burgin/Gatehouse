@@ -57,7 +57,7 @@ $(document).ready(function () {
             password = $(this).parent('.edit-user').find('.password');
         }
         var updateValid = true;
-        if (password.val().length > 5) {
+        if (password.val().length > 5 || password.val().length === 0) {
             password.removeClass('error');
         } else {
             updateValid = false;
@@ -66,7 +66,7 @@ $(document).ready(function () {
             }
 
         }
-        if (username.val().length > 2) {
+        if (username.val().length > 2 || username.val().length === 0) {
             username.removeClass('error');
         } else {
             updateValid = false;
