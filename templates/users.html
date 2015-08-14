@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block scripts %}
-	<script src="{{ url_for('static', filename='users.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/users.js') }}"></script>
 {% endblock %}
 {% block body %}
 <section id="users">
@@ -20,7 +20,7 @@
 			    <input type="submit" class="button" value="Add User">
 			</form>
 		</div>
-	</div> 
+	</div>
 
 	<!-- Editing Users -->
 	<div class="edit-users narrow-site-width">
@@ -44,11 +44,12 @@
 						<input type="password" class="password" placeholder="New Password" name="password">
 						{% if user.experationDate != 'False'%}
 							<input class="date-time" type="date" value="{{ user.experationDate }}" name="dateTmp">
+						{% else %}
+							<div>
+								<input type="checkbox" name="adminuser" class="admin-checkbox" {% if user.admin %} checked {% endif %}>
+								<span>Admin User</span>
+							</div>
 						{% endif %}
-						<div>
-							<input type="checkbox" name="adminuser" class="admin-checkbox" {% if user.admin %} checked {% endif %}>
-							<span>Admin User</span>
-						</div>
 						<input type="submit" class="button update-user disabled" value="Update User" disabled>
 					</form>
 				</div>
@@ -57,21 +58,4 @@
 	</div>
 </section>
 
-<script>
-$('.tmpuser').change(function(){
-    if($(this).is(":checked")) {
-        $('.date-time').addClass("visible");
-		$('.date-time').removeClass("hidden");
-
-    } else {
-        $('.date-time').addClass("hidden");
-		$('.date-time').removeClass("visible");
-    }
-});
-
-$(function() { $( "#accordion" ).accordion({
-	active: false,
-	collapsible: true
-});});
-</script>
 {% endblock %}

@@ -49,7 +49,6 @@ $(document).ready(function () {
         var username;
         var password;
         var submitButton = $(this).parent('.edit-user').find('.button');
-        alert(selector);
         if (selector.indexOf('password') != -1) {
             password = $(this);
             username = $(this).parent('.edit-user').find('.username');

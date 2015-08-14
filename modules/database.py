@@ -42,7 +42,6 @@ class Database:
             user = UserModel.query.filter_by(id=userID).first()
         else:
             user = None
-
         return user
 
     # LIST USERS
