@@ -83,7 +83,7 @@ def users():
                                success=success)
 
     # Verify Username
-    username = str(request.form['username'])
+    username = request.form['username']
     databaseUser = database.getUser(username)
     if (databaseUser is not None):
         error = "User already exists"
