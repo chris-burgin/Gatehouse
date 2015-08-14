@@ -136,7 +136,14 @@ def edituser():
 
     # Get ID and Username
     userID = request.args.get('userID')
+
+    # Checks Username
     username = request.form['username']
+    databaseUser = database.getUser(username)
+    if (databaseUser is not None):
+        error = "User already exists"
+        return render_template('users.html', users=database.userList(),
+                               error=error)
 
     # Checks Password
     if request.form['password']:
