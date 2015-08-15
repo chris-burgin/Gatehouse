@@ -8,22 +8,30 @@ class Database:
 
     # CREATE USER
     def createUser(self, username, password, admin, experationDate):
-        newUser = UserModel(username, password, admin, experationDate)
-        db.session.add(newUser)
-        db.session.commit()
+        try:
+            newUser = UserModel(username, password, admin, experationDate)
+            db.session.add(newUser)
+            db.session.commit()
+            return True
+        except:
+            return False
 
     # EDIT USER
     def editUser(self, userID, username, password, admin, experationDate):
-        user = self.getUser(None, userID)
-        if username:
-            user.username = username
-        if password:
-            user.password = password
-        if experationDate is not user.experationDate:
-            user.experationDate = experationDate
+        try:
+            user = self.getUser(None, userID)
+            if username:
+                user.username = username
+            if password:
+                user.password = password
+            if experationDate is not user.experationDate:
+                user.experationDate = experationDate
 
-        user.admin = admin
-        db.session.commit()
+            user.admin = admin
+            db.session.commit()
+            return True
+        except:
+            return False
 
     def removeUser(self, userID):
         try:

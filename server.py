@@ -15,7 +15,7 @@ from modules.garage import Garage
 DEBUG = True   # DONT FORGET TO REMOVE THIS
 USERNAME = 'admin'
 PASSWORD = 'default'
-SECRET_KEY = 'asdfasdf'  # str(random.random())
+SECRET_KEY = str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
@@ -32,6 +32,7 @@ def index():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
 
+    # Redirects on GET Request
     if request.method == 'GET':
         return render_template('login.html')
 
@@ -40,6 +41,7 @@ def login():
 
     databaseUser = database.getUser(username)
     if databaseUser:
+        # Checks username and password against the database
         if (username == databaseUser.username and
                 security.encrypt(password) == databaseUser.password):
 
@@ -48,23 +50,27 @@ def login():
                 error = "Your temporary account has expired."
                 return render_template('login.html', error=error)
 
+            # Updates Logged In Status and Admin Status
             user.login()
             if databaseUser.admin is True:
                 user.setAdmin()
             return redirect(url_for('index'))
 
+    # Checks Applicaton Admin
     if (request.form['username'] == app.config['USERNAME'] and
        request.form['password'] == app.config['PASSWORD']):
             user.login()
             user.setAdmin()
             return redirect(url_for('index'))
 
+    # Returns Invalid Login
     error = "Invalid Username or Password."
     return render_template('login.html', error=error, username=username)
 
 
 @app.route('/logout/')
 def logout():
+    # Logs The User Out
     user.logout()
     return redirect(url_for('index'))
 
@@ -119,7 +125,6 @@ def users():
 
     # Create User
     database.createUser(username, password, isAdmin, experationDate)
-
     success = ("%s was created!")
     success = success % username
     return render_template('users.html', users=database.userList(),
@@ -128,16 +133,18 @@ def users():
 
 @app.route('/edituser/', methods=['POST'])
 def edituser():
+    # Checks if the user is logged in
     if not user.loggedIn():
         return redirect(url_for('login'))
 
+    # Checks if the user is an admin
     if not user.isAdmin():
         return redirect(url_for('index'))
 
     # Get ID and Username
     userID = request.args.get('userID')
 
-    # Checks Username
+    # Checks if username already exists
     username = request.form['username']
     databaseUser = database.getUser(username)
     if (databaseUser is not None):
@@ -145,28 +152,33 @@ def edituser():
         return render_template('users.html', users=database.userList(),
                                error=error)
 
-    # Checks Password
+    # Checks password before encrpyting
     if request.form['password']:
         password = security.encrypt(request.form['password'])
     else:
         password = None
 
-    # Get Admin Status
+    # Checks admin status
     if (request.form.get('adminuser')):
         isAdmin = True
     else:
         isAdmin = False
 
-    # Get Temp User Status
-    if (request.form.get('dateTmp')):
-        experationDate = str(request.form.get('dateTmp'))
+    # Checks if user is a tmp user
+    tmpStatus = request.form.get('dateTmp')
+    if (tmpStatus):
+        experationDate = str(tmpStatus)
     else:
+        # Uses string for Jinja Template (May be able to use actuall False)
         experationDate = 'False'
 
     # Edits User
-    database.editUser(userID, username, password, isAdmin, experationDate)
-    success = 'User Updated!'
-    return redirect(url_for('users', success=success))
+    if database.editUser(userID, username, password, isAdmin, experationDate):
+        success = 'User Updated!'
+        return redirect(url_for('users', success=success))
+    else:
+        error = 'An error has occured.'
+        return redirect(url_for('users', error=error))
 
 
 @app.route('/removeuser/', methods=['POST'])
