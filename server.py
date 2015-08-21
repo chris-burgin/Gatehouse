@@ -206,7 +206,7 @@ def toggledoor():
 
 
 if __name__ == "__main__":
-    # garage.cleanupRelay()
+    garage.cleanupRelay()
     security = Security()
     user = User()
     database = Database()
