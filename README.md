@@ -1,4 +1,4 @@
-#### Still in development, beta coming soon.
+### [Learn how to install!](https://github.com/chrisburgin95/pigarage/wiki/Instalation)
 ## What is this?
 PIGARAGE is a dynamic multi user application for controlling your garage door
 remotely from anywhere in the world. Its a little more complication but in
@@ -43,65 +43,6 @@ that there will be no errors I can assure that there has been quite extensive
 testing and bug fixing before this beta release. If you find an error please
 let me know and I will fix it asap, please also feel free to submit pull
 requests with any optimization or bug fixes.
-
-
-
-## Installation
-#### Dependencies
-- Flask ``` $ pip install flask ```
-- SQLAlchemy ``` $ pip install SQLAlchemy  ```
-- Python 2.7
-
-#### Clone
-
-- ``` $ git clone https://github.com/chrisburgin95/pigarage.git ```
-
-#### Start application
-To start this application you can do one of the following.
-- ``` $ python server.py ```
-
-or you can run
-
-- ``` $ npm start ```
-
-if you have node installed. The nice thing about using npm start is that if there is an error in your application it will restart as soon as the error is resolved.
-
-If all has worked correctly you should be able to navigate to localhost:4000/ and login using the following
-
-    username: admin
-    password: default
-
-
-#### Customizing
-##### Master Login
-There are several things that need to be done to secure this application. The first is to change the master username and password. This username and password can never be added or removed and does not show up in the user list.
-
-Open "server.py" and change the following information to be your master username and password. Its very important that you do this, if not your application will be vulnerable.
-
-    USERNAME = 'admin'
-    PASSWORD = 'default'
-
-After changing this information restart your application and check to make sure that your new login information works.
-
-
-##### Server Port
-Next we want to change what port our application is listening too. At the bottom of the server.py file find the line that says.
-
-    app.run(host='127.0.0.1')
-
-Change the IP address to that of the local ip of your computer. If you now restart your server you can access your server at the following.
-
-    yourserverslocalip:4000/
-
-
-#### Connecting your PI
-Connect your [Relay](http://www.amazon.com/SainSmart-4-CH-4-Channel-Relay-Module/dp/B0057OC5O8/ref=pd_sim_422_3?ie=UTF8&refRID=0W5N4BWDCDYXT46VJ0D5) to the raspberry pi GPIO 4. Checkout [this](http://www.hobbytronics.co.uk/image/data/tutorial/raspberry-pi/gpio-pinout.jpg) chart to figure out which pin is GPIO 4.
-
-
-#### Connect to your garage door
-This part is fairly simple. Your opener should have a hot wire that when connected to neutral wire will trigger the door to open. I recommend taking a spare piece of wire that is shielded and try connecting the two wired together to test if you have found the correct pair.
-
-When you hit the toggle button in the application the relay that is connected to GPIO 4 will be connected and trigger the two wires will be connected, opening the door.
 
 
 ## Future Features

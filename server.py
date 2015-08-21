@@ -206,9 +206,9 @@ def toggledoor():
 
 
 if __name__ == "__main__":
-    garage.cleanupRelay()
     security = Security()
     user = User()
     database = Database()
     garage = Garage()
+    garage.cleanupRelay()
     app.run(host='127.0.0.1')
