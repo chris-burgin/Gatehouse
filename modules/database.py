@@ -9,6 +9,7 @@ class Database:
         directory = './tmp'
         if not os.path.exists(directory):
             os.makedirs(directory)
+
         with open(directory + "/database.db", "a+") as f:
             if f:
                 pass
