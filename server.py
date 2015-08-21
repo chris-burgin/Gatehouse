@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # IMPORTS
 from flask import Flask, request, redirect, url_for, \
     render_template
@@ -18,7 +17,7 @@ PASSWORD = 'default'
 SECRET_KEY = str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/database.db'
 
 
 @app.route('/', methods=['GET', 'POST'])

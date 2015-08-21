@@ -4,6 +4,13 @@ from database_model import UserModel
 
 class Database:
     def __init__(self):
+        # Checks if database exists and creates it if it doest
+        with open("./tmp/database.db", "a+") as f:
+            if f:
+                pass
+            else:
+                pass
+
         db.create_all()
 
     # CREATE USER
