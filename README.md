@@ -1,3 +1,5 @@
+
+# Pi Garage - 0.1.0
 ### [Learn how to install!](https://github.com/chrisburgin95/pigarage/wiki/Installation)
 ## What is this?
 PIGARAGE is a dynamic multi user application for controlling your garage door
@@ -46,29 +48,7 @@ requests with any optimization or bug fixes.
 
 
 ## Future Features
-#### Log
-The next logical step in a user based system is to track when users open
-and close the garage door. This can be great for parents or if you are
-away on vacation with a house sitter(billy).
-
-
-
-#### Webcam
-This is going to need to be implemented on a user by user basis. I will
-add the ability for PIGARAGE to show a webcam photo in the area below the
-home button. Each time the home page is loaded PIGARAGE will look for a
-a shell file to execute and take a photo that PIGARAGE will load. This is
-where its left to the user, I will provide a shell script with support for
-common web cam types.
-
-The webcam will be used to show whether the garage door is open or closed,
-as you noticed the application says "Toggle Door". I wanted to keep this
-simple and avoid purchasing extra equipment to provide an actual status of
-the door. I believe it is more important to be able to see the door and the
-enviorment around.
-
-Note: If the user has no script written the application will look as currently
-presented with no webcam photo.
+Checkout Github Issues to see a list of future features and keep track of their status.
 
 
 
