@@ -1,4 +1,4 @@
-### [Learn how to install!](https://github.com/chrisburgin95/pigarage/wiki/Instalation)
+### [Learn how to install!](https://github.com/chrisburgin95/pigarage/wiki/Installation)
 ## What is this?
 PIGARAGE is a dynamic multi user application for controlling your garage door
 remotely from anywhere in the world. Its a little more complication but in
