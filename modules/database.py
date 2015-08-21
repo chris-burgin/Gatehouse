@@ -1,11 +1,15 @@
 from database_model import db
 from database_model import UserModel
+import os
 
 
 class Database:
     def __init__(self):
         # Checks if database exists and creates it if it doest
-        with open("./tmp/database.db", "a+") as f:
+        directory = './tmp'
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        with open(directory + "/database.db", "a+") as f:
             if f:
                 pass
             else:
