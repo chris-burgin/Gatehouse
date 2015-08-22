@@ -8,6 +8,7 @@ from modules.security import Security
 from modules.user import User
 from modules.database import Database
 from modules.garage import Garage
+from modules.settings import Settings
 
 
 # GLOBAL VARIABES
@@ -209,5 +210,6 @@ if __name__ == "__main__":
     user = User()
     database = Database()
     garage = Garage()
+    settings = Settings()
     garage.cleanupRelay()
-    app.run(host='127.0.0.1')
+    app.run(host=settings.ipAddress())
