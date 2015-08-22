@@ -36,12 +36,12 @@ for line in fileinput.input('./modules/settings.py', inplace=1):
         print ("        IP = '" + IP + "'")
         continue
 
-    if (counter == 10):
+    if (counter == 11):
         line.strip()
         print ("        username = '" + username + "'")
         continue
 
-    if (counter == 14):
+    if (counter == 15):
         line.strip()
         print ("        password = '" + password + "'")
         continue
