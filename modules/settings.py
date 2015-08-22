@@ -1,5 +1,4 @@
 class Settings:
-    pinList = [4]
 
     def __init__(self):
         pass

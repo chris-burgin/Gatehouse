@@ -14,8 +14,13 @@ from modules.settings import Settings
 # GLOBAL VARIABES
 settings = Settings()
 DEBUG = True   # DONT FORGET TO REMOVE THIS
+<<<<<<< HEAD
 USERNAME = settings.username()
 PASSWORD = settings.password()
+=======
+USERNAME = 'admin'
+PASSWORD = 'default'
+>>>>>>> 43ac646699ef65dce47f372b638eed0e7e10fe85
 SECRET_KEY = str(random.random())
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -207,14 +212,22 @@ def toggledoor():
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     # Class Instances
+=======
+>>>>>>> 43ac646699ef65dce47f372b638eed0e7e10fe85
     security = Security()
     user = User()
     database = Database()
     garage = Garage()
+<<<<<<< HEAD
 
     # Do Stuff
     garage.cleanupRelay()
 
     # Start The App
+=======
+    settings = Settings()
+    garage.cleanupRelay()
+>>>>>>> 43ac646699ef65dce47f372b638eed0e7e10fe85
     app.run(host=settings.ipAddress())

@@ -31,17 +31,17 @@ s.close()
 counter = 0
 for line in fileinput.input('./modules/settings.py', inplace=1):
     counter = counter + 1
-    if (counter == 8):
+    if (counter == 7):
         line.strip()
         print ("        IP = '" + IP + "'")
         continue
 
-    if (counter == 12):
+    if (counter == 10):
         line.strip()
         print ("        username = '" + username + "'")
         continue
 
-    if (counter == 16):
+    if (counter == 14):
         line.strip()
         print ("        password = '" + password + "'")
         continue
