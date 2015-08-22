@@ -27,8 +27,7 @@ html {
 .site-width {
   margin: 0 auto;
   max-width: 120rem;
-    padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding: 0 2.5rem;
 }
 
 .narrow-site-width {
@@ -41,8 +40,10 @@ html {
 a,
 a:hover,
 a:visited {
-  color: #1ABC79;
+  color: #30cc7b;
   text-decoration: none;
+  font-family: Oswald;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -52,13 +53,18 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
 p {
   font-size: 1.5rem;
   font-family: Oswald;
-}
-
-h1 {
-  font-size: 2rem;
+  font-weight: 300;
 }
 
 #accordion {
@@ -86,6 +92,11 @@ form input {
   font-size: 2rem;
   text-align: center;
   font-weight: 300;
+  outline: 0;
+}
+
+form input.error {
+    border-color: #ff4141 !important;
 }
 
 form input.button {
@@ -94,7 +105,6 @@ form input.button {
   color: white;
   width: 100%;
 }
-
 
 .ui-accordion-header.ui-state-default.ui-accordion-icons {
     border-color: #757575;
@@ -113,59 +123,140 @@ form input.button {
     font-size: 2rem;
 }
 
+#accordion .ui-accordion-content {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
 
+/* Notifications */
+.notification {
+  color: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5rem;
+  animation: fadein 1s, expanddown .7s;
+  position: relative;
+}
 
+.notification.error {
+    background-color: #FF4141;
+}
 
+.notification.success {
+    background-color: #30cc7b;
+}
+
+.notification.general {
+    background-color: #A2A7A6;
+}
 
 /* header */
 nav {
-  display: none;
+    width: 100%;
+    background-color: #2A2832;
+    height: 8rem;
 }
 
-.slicknav_label, .slicknav_nav {
-  background-color:#2A2832;
+nav .site-width {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.mini a:visited{
-  color: white;
+nav h1 a span {
+    color: white;
+}
+
+nav .menu {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+}
+
+nav .menu li {
+    height: 100%;
+}
+
+nav .menu li a {
+    font-size: 2.5rem;
+    color: white;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+nav .menu .main-menu-item {
+    display: none;
 }
 
 /* Login */
-
 #login {
   margin-top: 10rem;
   display: flex;
   justify-content: center;
-  flex-flow: row wrap;
 }
 
-#login .login-error {
-  color: red;
-  font-family: Oswald;
-  font-size: 2rem;
+
+/* Home */
+#index .wrapper {
+    padding: 5rem 0;
 }
 
-/* Add User */
+#index .narrow-site-width {
+    padding: 0;
+}
+
+#index form input.button {
+    height: 10rem;
+    font-size: 4rem;
+    background-color: #30cc7b;
+}
+
+#index .wrapper form input {
+    border-radius: 0;
+}
+
+/* Users */
 
 #users {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
+    margin: 0 auto;
 }
 
 #users h1 {
     width: 100%;
-    align-items: left;
-    margin-top: 5rem;
 }
 
-#users hr {
-    border-color: #757575;
-    border: solid 1px;
-    width: 100%;
-    color: #757575;
+/* Create Users */
+
+#users .create-user {
+    padding: 1rem 0;
+    padding-top: 5rem;
+    background-color: #E4E4E4;
 }
+
+/* Edit Users */
+#users .edit-users {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+#users .edit-user {
+    width: 95%;
+    padding: 2rem;
+}
+
+#users .edit-user .button.update-user.disabled {
+    background-color: #A2A7A6;
+}
+
 
 #users form input.date-time {
     width: 100%;
@@ -175,9 +266,7 @@ nav {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     margin-top: 1rem;
-
 }
 
 #users form div input {
@@ -191,6 +280,11 @@ nav {
     margin-left: 2rem;
 }
 
+#users .ui-accordion-header .ui-accordion-header-icon {
+    display: none;
+}
+
+/* Form Date Animations */
 #users form .hidden {
     display: none;
 }
@@ -201,83 +295,66 @@ nav {
     display: block;
 }
 
+/* Trash Icon */
+#users h3.ui-accordion-header {
+    display: flex;
+    justify-content: space-between;
+}
+#users h3.ui-accordion-header i {
+    padding-left: 1rem;
+}
 
-/* Home */
-#index form input.button {
-  margin-top: 5rem;
-  height: 5rem;
+#users h3.ui-accordion-header i.fa-trash-o:hover {
+    color: #FF4141;
 }
 
 @media screen and (min-width: 800px) {
+    /* Global CSS */
+    h1 {
+        font-size: 4.3rem;
+    }
 
-  h1 {
-    font-size: 4.3rem;
-  }
+    form input {
+        width: 49%;
+    }
 
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
-  }
+    /* Navigation Menu */
+    nav .menu .main-menu-item {
+        display: inline-block;
+    }
 
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
-  }
-  nav div.site-width {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+    nav .menu li a:hover {
+        background-color: #30cc7b;
+    }
 
-  nav div.site-width h1 a span {
-   color: white;
-  }
+    nav .menu li a i {
+        margin-right: 1rem;
+    }
 
-  nav div.site-width div a {
-    margin-left: 2rem;
-    font-size: 2.5rem;
-    font-weight: 300;
-    font-family: Oswald;
-    text-transform: uppercase;
-    color: white;
-  }
+    /* Users */
+    #users .create-user {
+        padding: 8rem 0;
+    }
 
-  nav div.site-width div a:hover {
-   color:#1ABC79;
-  }
+    #index .wrapper {
+        background-color: #E4E4E4;
+    }
 
-  .mini {
-    display: none;
-  }
-
-  nav {
-    width: 100%;
-    background-color: #2A2832;
-    height: 8rem;
-    display: block;
-  }
-
-  form input {
-      width: 49%;
-  }
+    #index .wrapper form input {
+        border-radius: .4rem;
+    }
 
 }
 
-
 @keyframes fadein {
-	from {opacity: 0;}
-    to {opacity: 1;}
+	from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes fadedown {
-	from {margin-bottom: -5rem; }
+	from { margin-bottom: -5rem; }
+}
+
+@keyframes expanddown {
+    from { height: 0;}
 }

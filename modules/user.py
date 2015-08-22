@@ -1,5 +1,6 @@
 from flask import session
 from datetime import datetime
+import string
 
 
 class User:
@@ -9,15 +10,16 @@ class User:
         if session.get('logged_in'):
             return True
         else:
-            return False;
+            return False
 
-    #EXPIRATION
+    # EXPIRATION
     def isExpired(self, date):
         now = datetime.now()
-        experationDate = datetime.strptime(date, '%Y-%m-%d')
-        currentDate = datetime.strptime(now.strftime('%Y-%m-%d'), '%Y-%m-%d')
-
-        if experationDate <= currentDate:
+        experationDate = self.formatDate(str(date))
+        currentDate = str(now.strftime('%Y%m%d'))
+        print ('current date ' + str(currentDate))
+        print ('experation date ' + str(experationDate))
+        if int(experationDate) <= int(currentDate):
             return True
         else:
             return False
@@ -41,3 +43,10 @@ class User:
     # SET ADMIN
     def setAdmin(self):
         session['is_admin'] = True
+
+    # FORMAT DATE
+    def formatDate(self, date):
+        all = string.maketrans('', '')
+        nodigs = all.translate(all, string.digits)
+        date = date.translate(all, nodigs)
+        return date

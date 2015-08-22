@@ -2,16 +2,20 @@ var pkg = require('./package.json'),
     gulp = require('gulp'),
     rename = require('gulp-rename'),
     autoprefixer = require('gulp-autoprefixer'),
-    minify = require('gulp-minify-css'),
+    minifycss = require('gulp-minify-css'),
+    myth = require('gulp-myth'),
     contact = require('gulp-concat');
+
 
 gulp.task('css', function() {
   return gulp.src('static/*.css')
+  .pipe(myth())
   .pipe(autoprefixer({
           browsers: ['> 2%'],
           cascade: false
         }))
   .pipe(contact('style.min.css'))
+  .pipe(minifycss({compatibility: 'ie8'}))
   .pipe(gulp.dest('static/css'));
 });
 

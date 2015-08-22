@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block body %}
-	<section id="index" class="narrow-site-width"> 
-		<form action="{{ url_for('toggledoor') }}" method="post">
-		    <input class="button" type="submit" value="Toggle Door">
-		</form>
+	<section id="index" class="">
+		<div class="wrapper">
+			<form class="narrow-site-width" action="{{ url_for('toggledoor') }}" method="post">
+			    <input class="button" type="submit" value="Toggle Door">
+			</form>
+		</div>
 	</section>
 {% endblock %}
