@@ -13,7 +13,7 @@ from modules.settings import Settings
 
 # GLOBAL VARIABES
 settings = Settings()
-# DEBUG = True # This needs to be commented out in master for security.
+DEBUG = True # This needs to be commented out in master for security.
 USERNAME = settings.username()
 PASSWORD = settings.password()
 SECRET_KEY = str(random.random())
