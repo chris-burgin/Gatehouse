@@ -36,3 +36,13 @@ class Garage:
                 GPIO.output(pin, GPIO.HIGH)
         except:
             print 'Warning: Failed To Clean Up.'
+
+    # Door status
+    # True: open
+    # False: closed
+    def doorStatus(self):
+        try:
+            # Returns the current door status
+            pass
+        except:
+            print 'Could not get door status, please check the sensors.'

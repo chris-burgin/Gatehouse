@@ -2,6 +2,7 @@
 from flask import Flask, request, redirect, url_for, \
     render_template
 import random
+import time
 
 # MODULES
 from modules.security import Security
@@ -269,6 +270,23 @@ def toggledoor():
 
     # Loggles Door
     garage.toggleDoor()
+
+    # Waits for the door status to change
+    oldState = garage.doorStatus()
+    counter = 0
+    while True and counter < 15:
+        if oldState != garage.doorStatus():
+            break
+        time.sleep(1)
+        counter = counter + 1
+
+    # Returns door status
+    # True: open
+    # False: closed
+    if garage.doorStatus:
+        return True
+    else:
+        return False
 
     # Reloads index
     return redirect(url_for('index'))

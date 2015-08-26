@@ -1,8 +1,12 @@
 {% extends "base.html" %}
+{% block scripts %}
+	<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
 {% block body %}
 	<section id="index" class="">
 		<div class="wrapper">
-			<form class="narrow-site-width" action="{{ url_for('toggledoor') }}" method="post">
+			<form class="narrow-site-width"  method="post">
 			    <input class="button" type="submit" value="Toggle Door">
 			</form>
 		</div>
