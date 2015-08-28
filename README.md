@@ -1,6 +1,11 @@
 
 # Pi Garage - 0.2.0
 ### [Learn how to install!](https://github.com/chrisburgin95/Gatehouse/wiki/Installation)
+### Whats new?
+- Updated Code Comments
+- Styling (name, font)
+- Small Visual Bug ([#4](https://github.com/chrisburgin95/pigarage/issues/4))
+
 ## What is this?
 Gatehouse is a dynamic multi user application for controlling your garage door
 remotely from anywhere in the world. Its a little more complication but in
