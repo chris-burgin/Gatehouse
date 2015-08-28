@@ -17,7 +17,7 @@
 
 <body>
     <nav>
-        <div class="site-width">
+        <div {% if not session.logged_in %} class="login site-width" {% else %} class="site-width" {% endif %}>
         <h1>
             <a href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='img/logo.svg') }}">

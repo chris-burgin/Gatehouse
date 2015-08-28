@@ -185,6 +185,10 @@ nav .menu .main-menu-item {
   justify-content: center;
 }
 
+nav .site-width.login {
+    justify-content: center;
+}
+
 
 /* Home */
 #index .wrapper {
