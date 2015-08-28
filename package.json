@@ -1,5 +1,5 @@
 {
-  "name": "PIGARAGE",
+  "name": "Gatehouse",
   "version": "0.0.1",
   "description": "Raspberry Pi Remote Garage Door Opener",
   "main": "server.py",

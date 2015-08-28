@@ -268,7 +268,7 @@ def toggledoor():
     if not user.loggedIn():
         return redirect(url_for('login'))
 
-    # Loggles Door
+    # Toggles Door
     garage.toggleDoor()
 
     # Waits for the door status to change

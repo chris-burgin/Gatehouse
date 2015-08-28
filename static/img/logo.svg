@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="47px" height="41px" viewBox="0 0 47 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>nav</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Mockup-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="menu-copy" sketch:type="MSLayerGroup" transform="translate(-937.000000, -10.000000)" fill="#FFFFFF">
+            <g id="nav" transform="translate(937.000000, 10.000000)" sketch:type="MSShapeGroup">
+                <path d="M6.15384615,15.9886154 L40,15.9886154 L40,22.1424615 L15.3846154,22.1424615 L15.3846154,34.4501538 L30.7692308,34.4501538 L30.7692308,31.3732308 L18.4615385,31.3732308 L18.4615385,25.2193846 L40,25.2193846 L40,40.604 L6.15384615,40.604 L6.15384615,15.9886154 Z M6.15384615,23.6809231 L15.3846154,23.6809231 L15.3846154,25.2193846 L6.15384615,25.2193846 L6.15384615,23.6809231 Z M6.15384615,32.9116923 L15.3846154,32.9116923 L15.3846154,34.4501538 L6.15384615,34.4501538 L6.15384615,32.9116923 Z M30.7692308,32.9116923 L40,32.9116923 L40,34.4501538 L30.7692308,34.4501538 L30.7692308,32.9116923 Z M0,9.83476923 L23.0769231,0.604 L46.1538462,9.83476923 L46.1538462,40.604 L43.0769231,40.604 L43.0769231,12.9116923 L3.07692308,12.9116923 L3.07692308,40.604 L0,40.604 L0,9.83476923 Z" id="Rectangle-12-Copy-5"></path>
+            </g>
+        </g>
+    </g>
+</svg>
