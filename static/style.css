@@ -216,8 +216,7 @@ nav .menu .main-menu-item {
 /* Create Users */
 
 #users .create-user {
-    padding: 1rem 0;
-    padding-top: 5rem;
+    padding: 5rem 0;
     background-color: #E4E4E4;
 }
 
