@@ -19,6 +19,13 @@
   src: local('Oswald Bold'), local('Oswald-Bold'), url(http://fonts.gstatic.com/s/oswald/v10/bH7276GfdCjMjApa_dkG6ZBw1xU1rKptJj_0jans920.woff2) format('woff2'), url(http://fonts.gstatic.com/s/oswald/v10/bH7276GfdCjMjApa_dkG6bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
 }
 
+@font-face {
+  font-family: 'apple';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/apple.ttf') format("truetype");
+}
+
 /* Global CSS */
 html {
   font-size: 62.5%;
@@ -40,7 +47,7 @@ html {
 a,
 a:hover,
 a:visited {
-  color: #30cc7b;
+  color: #37D483;
   text-decoration: none;
   font-family: Oswald;
   font-weight: 300;
@@ -148,7 +155,7 @@ form input.button {
 }
 
 .notification.success {
-    background-color: #30cc7b;
+    background-color: #37D483;
 }
 
 .notification.general {
@@ -170,7 +177,8 @@ nav .site-width {
 }
 
 nav h1 a span {
-    color: white;
+    display: none;
+    color: white
 }
 
 nav .menu {
@@ -217,7 +225,7 @@ nav .menu .main-menu-item {
 #index form input.button {
     height: 10rem;
     font-size: 4rem;
-    background-color: #30cc7b;
+    background-color: #37D483;
 }
 
 #index .wrapper form input {
@@ -319,12 +327,17 @@ nav .menu .main-menu-item {
     }
 
     /* Navigation Menu */
+
+    nav h1 a span {
+        display: inline-block;
+    }
+
     nav .menu .main-menu-item {
         display: inline-block;
     }
 
     nav .menu li a:hover {
-        background-color: #30cc7b;
+        background-color: #37D483;
     }
 
     nav .menu li a i {
