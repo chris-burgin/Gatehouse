@@ -267,7 +267,7 @@ def toggledoor():
     if not user.loggedIn():
         return redirect(url_for('login'))
 
-    # Loggles Door
+    # Toggles Door
     garage.toggleDoor()
 
     # Reloads index

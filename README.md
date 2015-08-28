@@ -1,17 +1,22 @@
 
-# Pi Garage - 0.1.0
-### [Learn how to install!](https://github.com/chrisburgin95/pigarage/wiki/Installation)
+# Pi Garage - 0.2.0
+### [Learn how to install!](https://github.com/chrisburgin95/Gatehouse/wiki/Installation)
+### Whats new?
+- Updated Code Comments
+- Styling (name, font)
+- Small Visual Bug ([#4](https://github.com/chrisburgin95/pigarage/issues/4))
+
 ## What is this?
-PIGARAGE is a dynamic multi user application for controlling your garage door
+Gatehouse is a dynamic multi user application for controlling your garage door
 remotely from anywhere in the world. Its a little more complication but in
 return will provide you with a larger feature base.
 
-![Pi Garage Home](http://i.imgur.com/D7vS2HI.png)
+![Pi Garage Home](http://i.imgur.com/pPlYeCJ.png)
 
 
 ## Key Features
 #### Multiple Users
-One of the key features of PIGARAGE is the ability to have multiple users with
+One of the key features of Gatehouse is the ability to have multiple users with
 a varying level of control. Below are the different types of users available:
     - Admin User: Add, Remove and Edit users.
     - Normal User: Toggle the garage door.
@@ -25,9 +30,9 @@ The concept behind multiple users can be explained in this simple example.
     you finally return from your trip billys account automatically expires on
     the date you set.
 
-![Multiple User](http://i.imgur.com/rjRuYSy.png)
+![Multiple User](http://i.imgur.com/7A8q6fe.png)
 
-This also provides a great set of tools for future expansion of pigarage. Which
+This also provides a great set of tools for future expansion of Gatehouse. Which
 include a log to show admin users when the door has been opened and closed. So
 you know if billy is actually feeding your cat(s).
 
@@ -36,15 +41,22 @@ Pi Garage is centered around the Idea that opening and closing your garage shoul
 
 But who wants to login every single time they have to open their garage. No one does, because of this each login session will be stored until either this software is restarted or the end user logs out.
 
-![Pigarage Login](http://i.imgur.com/7wxUytC.png)
+![Gatehouse Login](http://i.imgur.com/aTWWiCG.png)
 
 #### Error Checking
 A lot of simple projected created for the raspberry pi are thrown together and
-easy to break. This is not the case with PIGARAGE. While I can not guarantee
+easy to break. This is not the case with Gatehouse. While I can not guarantee
 that there will be no errors I can assure that there has been quite extensive
 testing and bug fixing before this beta release. If you find an error please
 let me know and I will fix it asap, please also feel free to submit pull
 requests with any optimization or bug fixes.
+
+
+#### Not Just Mobile
+Login from anywhere with a the desktop version. Gatehouse is fully responsive and will work on most popular desktop browsers.
+
+![Gatehouse Login](http://i.imgur.com/QJdQLeQ.png)
+
 
 
 ## Future Features
