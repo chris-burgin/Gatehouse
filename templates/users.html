@@ -10,7 +10,7 @@
 			<form action="{{ url_for('users') }}" method="post" >
 				<input type="text" class="username" {% if username %} value="{{username}}" {% endif %} placeholder="Username" name="username">
 				<input type="password" class="password" placeholder="Password" name="password">
-				<div class="form-option">
+				<div>
 					<input type="checkbox" name="adminuser">
 					<span>Admin</span>
 					<input class="tmpuser" type="checkbox" name="tempuser">
