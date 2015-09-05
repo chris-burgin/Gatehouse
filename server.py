@@ -271,13 +271,13 @@ def toggledoor():
     garage.toggleDoor()
     status = garage.doorStatus()
     if status is None:
-        return False
+        return 'failed'
 
     if status is True:
-        return True
+        return 'success'
 
     if status is False:
-        return False
+        return 'failed'
 
 
 # INIT the application

@@ -8,7 +8,8 @@ $(document).ready(function () {
             success: function(result) {
                 //True: open
                 //False: closed
-                if (result === true) {
+                alert('made it here');
+                if (result === 'success') {
                     alert('door open');
                 } else {
                     alert('door closed')
