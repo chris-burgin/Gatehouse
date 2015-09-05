@@ -1,6 +1,7 @@
 $(document).ready(function () {
     //Toggle Door
     $('.button').click(function() {
+        event.preventDefault();
         $.ajax({
             type : "POST",
             url : "/toggledoor/",

@@ -42,7 +42,11 @@ class Garage:
     # False: closed
     def doorStatus(self):
         try:
-            # Returns the current door status
-            pass
+            GPIO.setup(22, GPIO.IN)
+            counter = 0
+
+            while True:
+                counter = 0
+                pass
         except:
             print 'Could not get door status, please check the sensors.'
