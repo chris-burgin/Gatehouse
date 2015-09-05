@@ -40,13 +40,27 @@ class Garage:
     # Door status
     # True: open
     # False: closed
+    # None: Timeout/Error
     def doorStatus(self):
         try:
             GPIO.setup(22, GPIO.IN)
             counter = 0
-
+            lastState = GPIO.input(22)
+            startTime = int(round(time.time() * 1000))
             while True:
-                counter = 0
-                pass
+                state = GPIO.input(22)
+                if state == lastState:
+                    counter = counter + 1
+                    if counter >= 100:
+                        if state == 1:
+                            return True
+                        else:
+                            return False
+                else:
+                    lastState = state
+                    counter = 0
+                    currentTime = int(round(time.time() * 1000))
+                    if ((currentTime - startTime) > 20000):
+                        return None
         except:
-            print 'Could not get door status, please check the sensors.'
+            return None

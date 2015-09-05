@@ -2,7 +2,6 @@
 from flask import Flask, request, redirect, url_for, \
     render_template
 import random
-import time
 
 # MODULES
 from modules.security import Security
@@ -270,9 +269,15 @@ def toggledoor():
 
     # Toggles Door
     garage.toggleDoor()
+    status = garage.doorStatus()
+    if status is None:
+        return False
 
-    return True
+    if status is True:
+        return True
 
+    if status is False:
+        return False
 
 
 # INIT the application

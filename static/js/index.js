@@ -9,9 +9,9 @@ $(document).ready(function () {
                 //True: open
                 //False: closed
                 if (result === true) {
-                    // Change door status message to open
+                    alert('door open');
                 } else {
-                    // Change door status message to closed
+                    alert('door closed')
                 }
             }
         });
