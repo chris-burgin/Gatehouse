@@ -5,14 +5,14 @@ import string
 
 class User:
 
-    # LOGGED IN
+    # Logged In
     def loggedIn(self):
         if session.get('logged_in'):
             return True
         else:
             return False
 
-    # EXPIRATION
+    # Experation
     def isExpired(self, date):
         now = datetime.now()
         experationDate = self.formatDate(str(date))
@@ -24,27 +24,27 @@ class User:
         else:
             return False
 
-    # ISADMIN
+    # Is Admin
     def isAdmin(self):
         if session.get('is_admin'):
             return True
         else:
             return False
 
-    # LOGOUT
+    # Logout
     def logout(self):
         session.pop('logged_in', None)
         session.pop('is_admin', None)
 
-    # LOGIN
+    # Login
     def login(self):
         session['logged_in'] = True
 
-    # SET ADMIN
+    # Set Admin
     def setAdmin(self):
         session['is_admin'] = True
 
-    # FORMAT DATE
+    # Forman Date
     def formatDate(self, date):
         all = string.maketrans('', '')
         nodigs = all.translate(all, string.digits)

@@ -17,7 +17,7 @@ class Garage:
 
         self.__pinList = pinList
 
-    # TOGGLE FUNCTION
+    # Toggle Door
     def toggleDoor(self):
         try:
             for pin in self.__pinList:

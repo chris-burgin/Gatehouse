@@ -18,7 +18,7 @@ class Database:
 
         db.create_all()
 
-    # CREATE USER
+    # Create User
     def createUser(self, username, password, admin, experationDate):
         try:
             newUser = UserModel(username, password, admin, experationDate)
@@ -28,7 +28,7 @@ class Database:
         except:
             return False
 
-    # EDIT USER
+    # Edit User
     def editUser(self, userID, username, password, admin, experationDate):
         try:
             user = self.getUser(None, userID)
@@ -45,6 +45,7 @@ class Database:
         except:
             return False
 
+    # Remove User
     def removeUser(self, userID):
         try:
             user = self.getUser(None, userID)
@@ -54,7 +55,7 @@ class Database:
         except:
             return False
 
-    # GET USER
+    # Get User
     def getUser(self, username=None, userID=None):
         if username:
             user = UserModel.query.filter_by(username=username).first()
@@ -64,7 +65,7 @@ class Database:
             user = None
         return user
 
-    # LIST USERS
+    # List Users
     def userList(self):
         users = UserModel.query.all()
         return users
