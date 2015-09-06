@@ -6,19 +6,21 @@ import time
 
 
 class Garage:
-    pinList = [4]
+    __pinList = [4]
 
-    def __init__(self):
+    def __init__(self, pinList):
         try:
             GPIO.setmode(GPIO.BCM)
             self.cleanupRelay()
         except:
             print 'Warning: Could Not Init Garage.'
 
+        self.__pinList = pinList
+
     # TOGGLE FUNCTION
     def toggleDoor(self):
         try:
-            for pin in self.pinList:
+            for pin in self.__pinList:
                 GPIO.output(pin, GPIO.LOW)
 
             time.sleep(.2)
@@ -31,7 +33,7 @@ class Garage:
     # Cleanup PI
     def cleanupRelay(self):
         try:
-            for pin in self.pinList:
+            for pin in self.__pinList:
                 GPIO.setup(pin, GPIO.OUT)
                 GPIO.output(pin, GPIO.HIGH)
         except:

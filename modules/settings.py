@@ -5,9 +5,9 @@ class Settings:
     __IP = None
     __username = None
     __password = None
+    __pinlist = [4]
 
     def __init__(self):
-
         try:
             with open('./config.json', "r") as outfile:
                 data = json.load(outfile)
@@ -28,3 +28,6 @@ class Settings:
 
     def password(self):
         return self.__password
+
+    def pinlist(self):
+        return self.__pinlist

@@ -290,16 +290,18 @@ def doorstatus():
 
 # INIT the application
 if __name__ == "__main__":
+    # Settings Instances
+    settings = Settings()
+
     # Class Instances
     security = Security()
     user = User()
     database = Database()
-    garage = Garage()
+    garage = Garage(settings.pinlist())
 
     # Do Stuff
     garage.cleanupRelay()
 
     # Start The App
-    settings = Settings()
     garage.cleanupRelay()
     app.run(settings.ipAddress())
