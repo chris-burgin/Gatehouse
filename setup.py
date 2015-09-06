@@ -1,6 +1,5 @@
 import socket
-import string
-import fileinput
+import json
 
 
 print('Welcome to Garage PI!')
@@ -22,28 +21,11 @@ username = raw_input("Master Username: ")
 password = raw_input("Master Password: ")
 
 
-# SETUP
-s = open("./modules/settings.py", "r+")
-for line in s.readlines():
-    string.replace(line, "IP = '*'", "minnie")
-s.close()
-
-counter = 0
-for line in fileinput.input('./modules/settings.py', inplace=1):
-    counter = counter + 1
-    if (counter == 7):
-        line.strip()
-        print ("        IP = '" + IP + "'")
-        continue
-
-    if (counter == 11):
-        line.strip()
-        print ("        username = '" + username + "'")
-        continue
-
-    if (counter == 15):
-        line.strip()
-        print ("        password = '" + password + "'")
-        continue
-
-    print(line),
+with open('config.json', "r+") as outfile:
+    data = json.load(outfile)
+    outfile.seek(0)
+    outfile.truncate()
+    data['username'] = username
+    data['password'] = password
+    data['ip'] = IP
+    json.dump(data, outfile)

@@ -1,16 +1,30 @@
+import json
+
+
 class Settings:
+    __IP = None
+    __username = None
+    __password = None
 
     def __init__(self):
-        pass
+
+        try:
+            with open('./config.json', "r") as outfile:
+                data = json.load(outfile)
+                self.__IP = data['ip']
+                self.__username = data['username']
+                self.__password = data['password']
+        except:
+            # Fallbacks
+                self.__IP = '127.0.0.1'
+                self.__username = 'admin'
+                self.__password = 'default'
 
     def ipAddress(self):
-        IP = '127.0.0.1'
-        return IP
+        return self.__IP
 
     def username(self):
-        username = 'admin'
-        return username
+        return self.__username
 
     def password(self):
-        password = 'default'
-        return password
+        return self.__password

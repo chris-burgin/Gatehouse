@@ -302,4 +302,4 @@ if __name__ == "__main__":
     # Start The App
     settings = Settings()
     garage.cleanupRelay()
-    app.run(host=settings.ipAddress())
+    app.run(settings.ipAddress())

@@ -23,5 +23,5 @@
     "gulp-minify-css": "^1.1.0",
     "gulp-myth": "^1.0.3",
     "gulp-rename": "^1.2.2"
-  }
+    },
 }
