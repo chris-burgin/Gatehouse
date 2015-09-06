@@ -15,7 +15,6 @@ $(document).ready(function () {
         event.preventDefault();
         $.ajax({
             type : "POST",
-            async: false,
             url : "/toggledoor/",
             success: function(result) {
 
@@ -27,7 +26,6 @@ $(document).ready(function () {
     function checkDoor(){
         $.ajax({
             type : "POST",
-            async: false,
             url : "/doorstatus/",
             success: function(result) {
                 if (result === 'unknown') {
