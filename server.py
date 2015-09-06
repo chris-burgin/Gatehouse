@@ -269,15 +269,20 @@ def toggledoor():
 
     # Toggles Door
     garage.toggleDoor()
+    return "close started"
+
+
+@app.route('/doorstatus/', methods=['POST'])
+def doorstatus():
     status = garage.doorStatus()
     if status is None:
-        return 'failed'
+        return 'unknown'
 
     if status is True:
-        return 'success'
+        return 'open'
 
     if status is False:
-        return 'failed'
+        return 'closed'
 
 
 # INIT the application

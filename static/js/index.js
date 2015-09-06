@@ -4,17 +4,31 @@ $(document).ready(function () {
         event.preventDefault();
         $.ajax({
             type : "POST",
+            async: false,
             url : "/toggledoor/",
             success: function(result) {
-                //True: open
-                //False: closed
-                alert('made it here');
-                if (result === 'success') {
-                    alert('door open');
-                } else {
-                    alert('door closed')
-                }
+
             }
         });
     });
 });
+
+
+// checks door status
+setTimeout(function(){
+    $.ajax({
+        type : "POST",
+        async: false,
+        url : "/doorstatus/",
+        success: function(result) {
+            if (result === 'unknown') {
+                alert ('unkown');
+            } else if (result === "open") {
+                alert ('open');
+            } else if (result === "closed") {
+                alert ('closed');
+            }
+
+        }
+    });
+}, 5000);
