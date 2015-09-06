@@ -46,7 +46,8 @@ class Garage:
             GPIO.setup(22, GPIO.IN)
             counter = 0
             lastState = GPIO.input(22)
-            while counter <= 100:
+            while True:
+                time.sleep(.0002);
                 state = GPIO.input(22)
                 if state == lastState:
                     counter = counter + 1
