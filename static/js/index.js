@@ -7,6 +7,7 @@ $(document).ready(function () {
             doorLoop();
         }, 5000);
     }
+    checkDoor();
     doorLoop();
 
     //Toggle Door
