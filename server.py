@@ -284,6 +284,9 @@ def doorstatus():
     if status is False:
         return 'closed'
 
+    if status is 'error':
+        return 'error'
+
 
 # INIT the application
 if __name__ == "__main__":

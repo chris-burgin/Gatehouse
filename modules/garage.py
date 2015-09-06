@@ -40,14 +40,15 @@ class Garage:
     # Door status
     # True: open
     # False: closed
-    # None: Timeout/Error
+    # None: In Motion
+    # error: No GPIO
     def doorStatus(self):
         try:
             GPIO.setup(22, GPIO.IN)
             counter = 0
             lastState = GPIO.input(22)
             while True:
-                time.sleep(.0002);
+                time.sleep(.0002)
                 state = GPIO.input(22)
                 if state == lastState:
                     counter = counter + 1
@@ -59,4 +60,4 @@ class Garage:
                 else:
                     return None
         except:
-            return None
+            return 'error'
