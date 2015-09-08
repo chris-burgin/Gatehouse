@@ -1,15 +1,5 @@
 $(document).ready(function () {
 
-    // checks door status
-    function doorLoop() {
-        setTimeout(function(){
-            checkDoor();
-            doorLoop();
-        }, 5000);
-    }
-    checkDoor();
-    doorLoop();
-
     //Toggle Door
     $('.button').click(function() {
         event.preventDefault();
@@ -22,6 +12,20 @@ $(document).ready(function () {
         });
     });
 
+    // checks door status
+    function doorLoop() {
+        setTimeout(function(){
+            checkDoor();
+            doorLoop();
+        }, 5000);
+    }
+
+    var doorStatus = $('.doorstatus');
+    if (!doorStatus.hasClass('disabled')){
+        checkDoor();
+        doorLoop();
+    }
+
     //Check Door
     function checkDoor(){
         $.ajax({
@@ -29,11 +33,11 @@ $(document).ready(function () {
             url : "/doorstatus/",
             success: function(result) {
                 if (result === 'unknown') {
-                    $('.doorstatus').text('Door In Motion');
+                    doorStatus.text('Door In Motion');
                 } else if (result === "open") {
-                    $('.doorstatus').text('Door Open');
+                    doorStatus.text('Door Open');
                 } else if (result === "closed") {
-                    $('.doorstatus').text('Door Closed');
+                    doorStatus.text('Door Closed');
                 }
             }
         });

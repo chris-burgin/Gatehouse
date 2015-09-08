@@ -7,6 +7,7 @@ class Settings:
     __password = None
     __pinList = None
     __inputPin = None
+    __activeSensors = None
 
     def __init__(self):
         try:
@@ -17,6 +18,8 @@ class Settings:
                 self.__password = data['password']
                 self.__pinList = data['pinList']
                 self.__inputPin = data['inputPin']
+                self.__activeSensors = data['activeSensors']
+                print self.__activeSensors
         except:
             # Fallbacks
                 self.__IP = '127.0.0.1'
@@ -38,3 +41,6 @@ class Settings:
 
     def inputPin(self):
         return self.__inputPin
+
+    def activeSensors(self):
+        return self.__activeSensors

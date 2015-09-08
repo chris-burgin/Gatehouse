@@ -1,1 +1,1 @@
-{"username": "admin", "ip": "127.0.0.1", "password": "default", "pinList": [4], "inputPin": 22}
+{"username": "admin", "activeSensors": false, "ip": "192.168.1.102", "pinList": [4], "inputPin": 22, "password": "default"}

@@ -9,7 +9,7 @@
 			<form class="narrow-site-width"  method="post">
 			    <input class="button" type="submit" value="Toggle Door">
 			</form>
-			<span class="doorstatus"> </span>
+			<span class="doorstatus {% if not activeSensors %}disabled{% endif %}"> </span>
 		</div>
 	</section>
 {% endblock %}

@@ -35,7 +35,8 @@ def index():
     if not user.loggedIn():
         return redirect(url_for('login'))
     else:
-        return render_template('index.html')
+        return render_template('index.html',
+                               activeSensors=settings.activeSensors())
 
 
 @app.route('/login/', methods=['GET', 'POST'])
