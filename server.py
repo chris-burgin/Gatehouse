@@ -297,7 +297,7 @@ if __name__ == "__main__":
     security = Security()
     user = User()
     database = Database()
-    garage = Garage(settings.pinlist())
+    garage = Garage(settings.pinList(), settings.inputPin())
 
     # Do Stuff
     garage.cleanupRelay()

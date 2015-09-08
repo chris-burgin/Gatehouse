@@ -6,16 +6,18 @@ import time
 
 
 class Garage:
-    __pinList = [4]
+    __pinList = None
+    __inputPin = None
 
-    def __init__(self, pinList):
+    def __init__(self, pinList, inputPin):
+        self.__pinList = pinList
+        self.__inputPin = inputPin
+
         try:
             GPIO.setmode(GPIO.BCM)
             self.cleanupRelay()
         except:
             print 'Warning: Could Not Init Garage.'
-
-        self.__pinList = pinList
 
     # Toggle Door
     def toggleDoor(self):
@@ -46,12 +48,12 @@ class Garage:
     # error: No GPIO
     def doorStatus(self):
         try:
-            GPIO.setup(22, GPIO.IN)
+            GPIO.setup(self.__inputPin, GPIO.IN)
             counter = 0
-            lastState = GPIO.input(22)
+            lastState = GPIO.input(self.__inputPin)
             while True:
                 time.sleep(.0002)
-                state = GPIO.input(22)
+                state = GPIO.input(self.__inputPin)
                 if state == lastState:
                     counter = counter + 1
                     if counter >= 200:

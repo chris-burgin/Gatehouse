@@ -5,7 +5,8 @@ class Settings:
     __IP = None
     __username = None
     __password = None
-    __pinlist = [4]
+    __pinList = None
+    __inputPin = None
 
     def __init__(self):
         try:
@@ -14,11 +15,14 @@ class Settings:
                 self.__IP = data['ip']
                 self.__username = data['username']
                 self.__password = data['password']
+                self.__pinList = data['pinList']
+                self.__inputPin = data['inputPin']
         except:
             # Fallbacks
                 self.__IP = '127.0.0.1'
                 self.__username = 'admin'
                 self.__password = 'default'
+                self.__pinlist = [4]
 
     def ipAddress(self):
         return self.__IP
@@ -29,5 +33,8 @@ class Settings:
     def password(self):
         return self.__password
 
-    def pinlist(self):
-        return self.__pinlist
+    def pinList(self):
+        return self.__pinList
+
+    def inputPin(self):
+        return self.__inputPin
