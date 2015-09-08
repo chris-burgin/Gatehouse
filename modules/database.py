@@ -13,8 +13,6 @@ class Database:
         with open(directory + "/database.db", "a+") as f:
             if f:
                 pass
-            else:
-                pass
 
         db.create_all()
 
